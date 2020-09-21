@@ -4,19 +4,24 @@
 
 const header = $("header.scrollheader").parent();
 header
-  .prepend("<div id='sample'>hello coming from test script in public folder</div>")
-  .css({'background-color':'orange','text-sign':'center' });
+  .prepend(
+    "<div id='sample'>hello coming from test script in public folder</div>"
+  )
+  .css({ "background-color": "orange", "text-sign": "center" });
 
-  var node = document.createElement("h1");
-  var textnode = document.createTextNode("Water");
-  node.appendChild(textnode);
-  document.body.appendChild(node); 
-
-
-
-
-
-
+// var node = document.createElement("h1");
+// var textnode = document.createTextNode("Water");
+// node.appendChild(textnode);
+// document.body.appendChild(node);
+const element = React.createElement(
+  "h1",
+  { className: "greeting" },
+  "Hello, world!"
+);
+// var node = React.createElement("h1", "Hello from React");
+// var textnode = document.createTextNode("Water");
+// node.appendChild(textnode);
+document.body.appendChild(element);
 
 // const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
 // const preEpem=document.body.prepend('<div>REACT COMPONENT</div>')
