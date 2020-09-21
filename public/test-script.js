@@ -18,5 +18,5 @@ header
 // const bodyEl=document.getElementsByTagName('body');
 // bodyEl.append('<div>Hello from React</dov>')
 // console.log(bodyEl);
-console.log(ReactDOM);
-ReactDOM.render(<div>hello React</div>, document.getElementById("PageContainer"));
+// console.log(ReactDOM);
+// ReactDOM.render(<div>hello React</div>, document.getElementById("PageContainer"));
