@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PopOver from './PopOver';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import PopOver from './PopOver';
 
 const header = $("header.scrollheader").parent();
 header
