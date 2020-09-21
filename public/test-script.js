@@ -7,7 +7,7 @@ header
   .prepend("<div id='sample'>hello coming from test script in public folder</div>")
   .css({'background-color':'orange','text-sign':'center' });
 
-const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
+// const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
 // const preEpem=document.body.prepend('<div>REACT COMPONENT</div>')
 // ReactDOM.render(
 //   <React.StrictMode>
