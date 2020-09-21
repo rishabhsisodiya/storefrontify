@@ -16,6 +16,32 @@ const CREATE_SCRIPT_TAG = gql`
     }
 `;
 
+const QUERY_SCRIPTTAGS = gql`
+    query {
+        scriptTags(first: 5) {
+            edges {
+                node {
+                    id
+                    src
+                    displayScope
+                }
+            }
+        }
+    }
+`;
+
+const DELETE_SCRIPTTAG = gql`
+    mutation scriptTagDelete($id: ID!) {
+        scriptTagDelete(id: $id) {
+            deletedScriptTagId
+            userErrors {
+                field
+                message
+            }
+        }
+    }
+`;
+
 
 const ScriptPage = () => {
     const [createScripts] = useMutation(CREATE_SCRIPT_TAG);
