@@ -12,11 +12,12 @@ header
   reactScript.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
   var reactDomScript = document.createElement("script");
   reactDomScript.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.development.js")
-  var myScript = document.createElement("script");
-  myScript.setAttribute("src","Hello.js")
+  // var myScript = document.createElement("script");
+  // myScript.setAttribute("src","Hello.js")
   document.body.appendChild(reactScript);
   document.body.appendChild(reactDomScript);
-  document.body.appendChild(myScript);
+  ReactDOM.render('<div>React Magic</div>', document.getElementById('sample'));
+  // document.body.appendChild(myScript);
 
 // var node = document.createElement("h1");
 // var textnode = document.createTextNode("Water");
