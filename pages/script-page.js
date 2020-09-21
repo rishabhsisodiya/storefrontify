@@ -47,6 +47,7 @@ const ScriptPage = () => {
   const { loading, error, data } = useQuery(QUERY_SCRIPTTAGS);
   if (loading) return <Spinner accessibilityLabel="Query Spinner" />;
   if (error) return <div>{error.message}</div>;
+  console.log(data);
   return (
     <div>
       <p>These are available script tags</p>
