@@ -69,7 +69,7 @@ const header = $("header.scrollheader").parent();
 fetch('https://cors-anywhere.herokuapp.com/https://storefrontify.herokuapp.com/api/products?shop=ambraee-dev1.myshopify.com')
     .then(res => res.json())
     .then(data => {
-        makeApp(data.data)
+        // makeApp(data.data)
         console.log(data)
     })
     .catch(error => console.log(error))
