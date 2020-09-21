@@ -13,7 +13,7 @@ header
   var reactDomScript = document.createElement("script");
   reactDomScript.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.development.js")
   var myScript = document.createElement("script");
-  myScript.setAttribute("src","./Hello.js")
+  myScript.setAttribute("src","Hello.js")
   document.body.appendChild(reactScript);
   document.body.appendChild(reactDomScript);
   document.body.appendChild(myScript);
