@@ -71,7 +71,7 @@ function ScriptPage() {
                 createScripts({
                   variables: {
                     input: {
-                      src: "https://d733e9bf.ngrok.io/test-script.js",
+                      src: "https://storefrontify.herokuapp.com/test-script.js",
                       displayScope: "ALL"
                     }
                   },
