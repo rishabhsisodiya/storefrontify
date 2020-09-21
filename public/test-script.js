@@ -19,4 +19,4 @@ import PopOver from './PopOver';
 // bodyEl.append('<div>Hello from React</dov>')
 // console.log(bodyEl);
 
-ReactDOM.render(<div>hello React</div>, document.getElementById("banner-message"));
+ReactDOM.render(<div>hello React</div>, document.getElementById("PageContainer"));
