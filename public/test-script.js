@@ -1,4 +1,4 @@
-const header = $("header.scrollheader").parent();
+// const header = $("header.scrollheader").parent();
 // header
 //   .prepend(
 //     "<div id='sample'>hello coming from test script in public folder</div>"
@@ -33,14 +33,13 @@ body.css({
 
 const shop = Shopify.shop;
 
-const makeApp = products => {
+const makeApp = (products) => {
 
     const bestSellerContainer = $(
         `<div>Our best Seller</div>`
     )
     .css({
         'position': 'fixed',
-        'background-color': '#ffffff',
         'padding': '10px',
         'border': '1px solid black',
         'bottom': '80px',
@@ -50,13 +49,13 @@ const makeApp = products => {
         'display': 'none'
     })
 
-    const bestSellerButton = $('<img />').attr('src', 'https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923')
+    const bestSellerButton = $('<img/>').attr('src', 'https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923')
         .css({
             'position': 'fixed',
             'width': '150px',
             'bottom': '20px',
             'right': '20px',
-            'cursor': 'pointer'
+            'cursor': 'pointer',
         })
 
         body.append(bestSellerButton);
