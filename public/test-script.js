@@ -15,3 +15,5 @@ header
 //   </React.StrictMode>,
 //   document.getElementById('banner-message')
 // );
+const bodyEl=document.getElementsByTagName('body');
+console.log(bodyEl);
