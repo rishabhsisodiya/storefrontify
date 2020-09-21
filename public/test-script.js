@@ -16,4 +16,5 @@ header
 //   document.getElementById('banner-message')
 // );
 const bodyEl=document.getElementsByTagName('body');
-console.log(bodyEl);
+bodyEl.append('<div>Hello from React</dov>')
+// console.log(bodyEl);
