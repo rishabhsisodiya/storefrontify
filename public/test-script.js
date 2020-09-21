@@ -8,7 +8,22 @@ const header = $("header.scrollheader").parent();
 //   header
 //     .prepend(`<div>${data}</div>`)
 //     .css({ "background-color": "orange", "text-align": "center" });
-// };
+// // };
+// `<div style="overflow-y: scroll;">
+//             <h3>Our Best Sellers</h3>
+//             ${products.map(item => {
+//                 return`
+//                 <a href="/products/${item.handle}" style="display: flex; align-items: center; padding: 20px 10px; border-top: 1px solid black;">
+//                     <img src=${item.images[0].originalSrc} style="width: 75px;" />
+//                     <div style="display: flex; justify-content: space-between; align-items: start; width: 100%;">
+//                         <p style="padding: 0 10px;">${item.title}</p>
+//                         <p>${item.variants[0].price}</p>
+//                     </div>
+//                 </a>
+//                 `
+//             }).join('')
+//         }
+//         </div>`
 
 const body = $('body');
 
@@ -21,21 +36,7 @@ const shop = Shopify.shop;
 const makeApp = products => {
 
     const bestSellerContainer = $(
-        `<div style="overflow-y: scroll;">
-            <h3>Our Best Sellers</h3>
-            ${products.map(item => {
-                return`
-                <a href="/products/${item.handle}" style="display: flex; align-items: center; padding: 20px 10px; border-top: 1px solid black;">
-                    <img src=${item.images[0].originalSrc} style="width: 75px;" />
-                    <div style="display: flex; justify-content: space-between; align-items: start; width: 100%;">
-                        <p style="padding: 0 10px;">${item.title}</p>
-                        <p>${item.variants[0].price}</p>
-                    </div>
-                </a>
-                `
-            }).join('')
-        }
-        </div>`
+        `<div>Our best Seller</div>`
     )
     .css({
         'position': 'fixed',
