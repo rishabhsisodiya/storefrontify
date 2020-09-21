@@ -8,6 +8,15 @@ header
     "<div id='sample'>hello coming from test script in public folder</div>"
   )
   .css({ "background-color": "orange", "text-sign": "center" });
+  var reactScript = document.createElement("script");
+  reactScript.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
+  var reactDomScript = document.createElement("script");
+  reactDomScript.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.development.js")
+  var myScript = document.createElement("script");
+  myScript.setAttribute("src","./Hello.js")
+  document.body.appendChild(reactScript);
+  document.body.appendChild(reactDomScript);
+  document.body.appendChild(myScript);
 
 // var node = document.createElement("h1");
 // var textnode = document.createTextNode("Water");
@@ -15,10 +24,6 @@ header
 // document.body.appendChild(node);
 {/* <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script> */}
 {/* <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> */}
-var reactScript = document.createElement("script");
-reactScript.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
-var reactDomScript = document.createElement("script");
-reactDomScript.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.development.js")
 
 // node.setAttribute("crossorigin")
 // const element = React.createElement(
@@ -29,8 +34,7 @@ reactDomScript.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.
 // var node = React.createElement("h1", "Hello from React");
 // var textnode = document.createTextNode("Water");
 // node.appendChild(textnode);
-document.body.appendChild(reactScript);
-document.body.appendChild(reactDomScript);
+
 // document
 // const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
 // const preEpem=document.body.prepend('<div>REACT COMPONENT</div>')

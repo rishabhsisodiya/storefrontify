@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Hello = () => {
     return (
         <div>
@@ -9,3 +7,5 @@ const Hello = () => {
 }
 
 export default Hello;
+
+ReactDOM.render(<Hello />, document.getElementById('sample'));
