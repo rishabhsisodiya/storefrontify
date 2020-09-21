@@ -33,6 +33,7 @@ const element = React.createElement(
   { className: "greeting" },
   "Hello, world!"
 );
+node.append(element);
 document.body.appendChild(element)
 // document
 // const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
