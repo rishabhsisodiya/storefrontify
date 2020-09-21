@@ -4,9 +4,11 @@ const header = $("header.scrollheader").parent();
 //     "<div id='sample'>hello coming from test script in public folder</div>"
 //   )
 //   .css({ "background-color": "orange", "text-sign": "center" });
-
+const makeHeader = (data) => {
   header
-  .prepend(`<div>${data}</div>`).css({ "background-color": "orange", "text-align": "center" });
+    .prepend(`<div>${data}</div>`)
+    .css({ "background-color": "orange", "text-align": "center" });
+};
 
 // const body = $('body');
 
@@ -15,7 +17,6 @@ const header = $("header.scrollheader").parent();
 // })
 
 // const shop = Shopify.shop;
-
 
 // const makeApp = products => {
 
@@ -66,10 +67,13 @@ const header = $("header.scrollheader").parent();
 // }
 // https://storefrontify.herokuapp.com/auth?shop=ambraee-dev1.myshopify.com
 // for cors issue add https://cors-anywhere.herokuapp.com/ below with https://storefrontify.herokuapp.com
-fetch('https://cors-anywhere.herokuapp.com/https://storefrontify.herokuapp.com/api/products?shop=ambraee-dev1.myshopify.com')
-    .then(res => res.json())
-    .then(data => {
-        // makeApp(data.data)
-        console.log(data)
-    })
-    .catch(error => console.log(error))
+fetch(
+  "https://cors-anywhere.herokuapp.com/https://storefrontify.herokuapp.com/api/products?shop=ambraee-dev1.myshopify.com"
+)
+  .then((res) => res.json())
+  .then((data) => {
+    // makeApp(data.data)
+    makeHeader(data.data);
+    console.log(data);
+  })
+  .catch((error) => console.log(error));
