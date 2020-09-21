@@ -15,9 +15,11 @@ header
 // document.body.appendChild(node);
 {/* <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script> */}
 {/* <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> */}
-var node = document.createElement("script");
-// node.src("https://unpkg.com/react@16/umd/react.development.js");
+var reactScript = document.createElement("script");
 node.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
+var reactDomScript = document.createElement("script");
+node.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.development.js")
+
 // node.setAttribute("crossorigin")
 // const element = React.createElement(
 //   "h1",
@@ -27,14 +29,8 @@ node.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
 // var node = React.createElement("h1", "Hello from React");
 // var textnode = document.createTextNode("Water");
 // node.appendChild(textnode);
-document.body.appendChild(node);
-const element = React.createElement(
-  "h1",
-  { className: "greeting" },
-  "Hello, world!"
-);
-node.append(element);
-document.body.appendChild(node)
+document.body.appendChild(reactScript);
+document.body.appendChild(reactDomScript);
 // document
 // const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
 // const preEpem=document.body.prepend('<div>REACT COMPONENT</div>')
