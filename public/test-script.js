@@ -34,7 +34,7 @@ const element = React.createElement(
   "Hello, world!"
 );
 node.append(element);
-document.body.appendChild(element)
+document.body.appendChild(node)
 // document
 // const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
 // const preEpem=document.body.prepend('<div>REACT COMPONENT</div>')
