@@ -16,9 +16,9 @@ header
 {/* <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script> */}
 {/* <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> */}
 var reactScript = document.createElement("script");
-node.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
+reactScript.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
 var reactDomScript = document.createElement("script");
-node.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.development.js")
+reactDomScript.setAttribute("src","https://unpkg.com/react-dom@16/umd/react-dom.development.js")
 
 // node.setAttribute("crossorigin")
 // const element = React.createElement(
