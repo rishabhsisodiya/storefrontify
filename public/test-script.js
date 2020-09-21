@@ -19,11 +19,11 @@ var node = document.createElement("script");
 // node.src("https://unpkg.com/react@16/umd/react.development.js");
 node.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
 // node.setAttribute("crossorigin")
-const element = React.createElement(
-  "h1",
-  { className: "greeting" },
-  "Hello, world!"
-);
+// const element = React.createElement(
+//   "h1",
+//   { className: "greeting" },
+//   "Hello, world!"
+// );
 // var node = React.createElement("h1", "Hello from React");
 // var textnode = document.createTextNode("Water");
 // node.appendChild(textnode);
