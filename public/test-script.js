@@ -28,6 +28,12 @@ node.setAttribute("src","https://unpkg.com/react@16/umd/react.development.js")
 // var textnode = document.createTextNode("Water");
 // node.appendChild(textnode);
 document.body.appendChild(node);
+const element = React.createElement(
+  "h1",
+  { className: "greeting" },
+  "Hello, world!"
+);
+document.body.appendChild(element)
 // document
 // const divElement= document.body.appendChild("<div>REACT COMPONENT</div>")
 // const preEpem=document.body.prepend('<div>REACT COMPONENT</div>')
