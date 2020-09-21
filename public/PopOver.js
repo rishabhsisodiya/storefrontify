@@ -51,5 +51,3 @@ export default function FormDialog() {
     </div>
   );
 }
-
-// React.render(<FormDialog />, document.getElementById('sample'));ss
