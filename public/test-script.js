@@ -24,12 +24,14 @@ const popupOverlay = $(`
 <div></div>
 `).css({
     'visibility': 'visible',
-  'position': 'absolute',
+  'position': 'fixed',
   'background': '#ffffff',
-  'border': '3px solid #666666',
+  'border': '2px solid #666666',
   'width': '50%',
   'height': '50%',
-  'left': '25%',
+  'left': '50%',
+  'right':'50%',
+  'z-index':1
 });
 const popverContent = $(`
     <div>
@@ -39,7 +41,8 @@ const popverContent = $(`
         <button>Close</button>
     </div>
 `).css({
-    'visibility':'visible'
+    'visibility':'visible',
+    'z-index':1
 })
 popupOverlay.append(popverContent)
 body.append(popupOverlay)
