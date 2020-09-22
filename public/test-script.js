@@ -23,7 +23,7 @@ const shop = Shopify.shop;
 const popupImage = $("<img/>")
 .attr(
   "src",
-  "pop.jpg"
+  "./pop.jpg"
 ).css({
     'visibility': 'visible',
   'position': 'fixed',
