@@ -20,19 +20,33 @@ const shop = Shopify.shop;
 
 {/* <h2>jQuery Pop-Up Example</h2>
 <button class="open">Open</button> */}
+const popupImage = $("<img/>")
+.attr(
+  "src",
+  "pop.jpg"
+).css({
+    'visibility': 'visible',
+  'position': 'fixed',
+  'background': '#ffffff',
+  'border': '3px solid #666666',
+  'width': '50%',
+  'height': '50%',
+  'left': '25%',
+  'z-index':1
+});
+body.append(popupImage)
 const popupOverlay = $(`
 <div></div>
 `).css({
     'visibility': 'visible',
   'position': 'fixed',
   'background': '#ffffff',
-  'border': '2px solid #666666',
+  'border': '3px solid #666666',
   'width': '50%',
   'height': '50%',
-  'left': '50%',
-  'right':'50%',
+  'left': '25%',
   'z-index':1
-});
+})
 const popverContent = $(`
     <div>
         <h2>Pop-Up</h2>
@@ -44,8 +58,8 @@ const popverContent = $(`
     'visibility':'visible',
     'z-index':1
 })
-popupOverlay.append(popverContent)
-body.append(popupOverlay)
+// popupOverlay.append(popverContent)
+// body.append(popupOverlay)
 
 
 const makeApp = (products) => {
