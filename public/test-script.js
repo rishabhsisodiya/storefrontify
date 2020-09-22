@@ -50,23 +50,28 @@ const popupOverlay = $(`
 })
 const popoverContent = $(`
     <div>
-        <h1>Get on our list!<h1>
-        <p>Receive the latest trends and the best out of the best.</p>
-        <input type="email"  placeholder="Email" />
+        <h1>Get on our list!</h1>
+        <h3>Receive the latest trends and the best out of the best.</h3>
+        <input id="cEmail" type="email"  placeholder="Email" />
     </div>
 `).css({
     'visibility':'visible',
     'z-index':1
 })
-const getEmailButton = $(`<button>Get Superb Dresses </button>`)
+const sendEmailButton = $(`<button>Get Superb Dresses </button>`).css({
+    'text-align':'center',
+    'vertical-align': 'middle',
+    'color':'#212529',
+    'border-radius':'10px'
+})
+popoverContent.append(sendEmailButton)
 const closeButton = $(`<span>&times;</span>`).css({
     'color': '#aaaaaa',
   'float': 'right',
   'font-size': '28px',
   'font-weight': 'bold',
+  'pointer':'cursor'
 })
-popoverContent.append(getEmailButton)
-
 const popupImage = $("<img/>")
 .attr(
   "src",
@@ -79,6 +84,10 @@ body.append(popupOverlay)
 
 closeButton.click( ()=>{
     popupOverlay.slideToggle()
+} )
+
+sendEmailButton.click( ()=>{
+    alert($('#cEmail').val());
 } )
 
 
