@@ -18,8 +18,10 @@ body.css({
 
 const shop = Shopify.shop;
 
-{/* <h2>jQuery Pop-Up Example</h2>
-<button class="open">Open</button> */}
+{
+  /* <h2>jQuery Pop-Up Example</h2>
+<button class="open">Open</button> */
+}
 // const popupImage = $("<img/>")
 // .attr(
 //   "src",
@@ -38,59 +40,97 @@ const shop = Shopify.shop;
 const popupOverlay = $(`
 <div></div>
 `).css({
-    'visibility': 'visible',
-  'position': 'fixed',
-  'background': '#ffffff',
-  'border': '3px solid #666666',
-  'width': '50%',
-  'height': '50%',
-  'left': '25%',
-  'bottom':'25%',
-  'z-index':1
-})
+  visibility: "visible",
+  position: "fixed",
+  background: "#ffffff",
+  border: "3px solid #666666",
+  width: "50%",
+  height: "70%",
+  left: "25%",
+  bottom: "25%",
+  "z-index": 1,
+});
 const popoverContent = $(`
     <div>
-        <h1>Get on our list!</h1>
-        <h3>Receive the latest trends and the best out of the best.</h3>
-        <input id="cEmail" type="email"  placeholder="Email" />
+        <span 
+        class="closePopover" 
+        style="color: #aaaaaa,float:right,font-size:28px,font-weight:bold, pointer:cursor"
+        >&times;
+        </span>
+        <div style="justify-content:center, align-items:center">
+            <img 
+            src="https://bucket.mlcdn.com/a/2384/2384591/images/6774149206a58f05547bc10c499248404c907d7b.jpeg/e11c41a0eb4fb1bb73c36636ec16d818a8289d3e.jpeg" 
+            style="width:100%"
+            />
+        </div>
+        <div style="justify-content:center, align-items:center">
+            <h1>Get on our list!</h1>
+            <p>Receive the latest trends and the best out of the best.</p>
+        </div>
+        <div style="display:flex, padding:10px,justify-content:center, align-items:center">
+            <input id="cEmail" type="email"  placeholder="Email" />
+            <button id="sendemailbutton" style="color:#212529,border-radius:10px">Get Superb Dresses</button>
+        </div>
+        
+
     </div>
 `).css({
-    'visibility':'visible',
-    'z-index':1
-})
-const sendEmailButton = $(`<button>Get Superb Dresses </button>`).css({
-    'text-align':'center',
-    'vertical-align': 'middle',
-    'color':'#212529',
-    'border-radius':'10px'
-})
-popoverContent.append(sendEmailButton)
-const closeButton = $(`<span>&times;</span>`).css({
-    'color': '#aaaaaa',
-  'float': 'right',
-  'font-size': '28px',
-  'font-weight': 'bold',
-  'pointer':'cursor'
-})
-const popupImage = $("<img/>")
-.attr(
-  "src",
-  "https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923"
-)
-popupOverlay.append(closeButton)
-popupOverlay.append(popupImage)
-popupOverlay.append(popoverContent)
-body.append(popupOverlay)
-
-closeButton.click( ()=>{
-    popupOverlay.slideToggle()
-} )
-
-sendEmailButton.click( ()=>{
-    alert($('#cEmail').val());
-} )
+  visibility: "visible",
+  "z-index": 1,
+  padding: "10px",
+});
 
 
+popupOverlay.append(popoverContent);
+body.append(popupOverlay);
+
+$(".closePopover").click(() => {
+    popupOverlay.slideToggle();
+  });
+  
+  ("#sendemailbutton").click(() => {
+    alert($("#cEmail").val());
+    $("#cEmail").val("");
+  });
+
+// const sendEmailButton = $(`<button>Get Superb Dresses </button>`).css({
+//   "text-align": "center",
+//   "vertical-align": "middle",
+//   'color': "#212529",
+//   "border-radius": "10px",
+// });
+// popoverContent.append(sendEmailButton);
+// const closeButton = $(`<span>&times;</span>`).css({
+//   color: "#aaaaaa",
+//   float: "right",
+//   "font-size": "28px",
+//   "font-weight": "bold",
+//   pointer: "cursor",
+// });
+// const popupImage = $("<img/>")
+// .attr(
+//   "src",
+//   "https://bucket.mlcdn.com/a/2384/2384591/images/6774149206a58f05547bc10c499248404c907d7b.jpeg/e11c41a0eb4fb1bb73c36636ec16d818a8289d3e.jpeg"
+// ).css({
+//     'width':'100%',
+// })
+// popupOverlay.append(closeButton);
+// popupOverlay.append(popupImage);
+// popupOverlay.append(popoverContent);
+// body.append(popupOverlay);
+
+// Event handle of close button
+// closeButton.click(() => {
+//   popupOverlay.slideToggle();
+// });
+
+// sendEmailButton.click(() => {
+//   alert($("#cEmail").val());
+//   $("#cEmail").val("");
+// });
+
+
+//  Best Seller APP
 const makeApp = (products) => {
   const bestSellerContainer = $(
     `<div style="overflow-y: scroll;">
@@ -110,15 +150,15 @@ const makeApp = (products) => {
               .join("")}
         </div>`
   ).css({
-    'position': "fixed",
+    position: "fixed",
     "background-color": "#ffffff",
-    'padding': "10px",
-    'border': "1px solid black",
-    'bottom': "80px",
-    'right': "25px",
-    'height': "400px",
-    'width': "350px",
-    'display': "none",
+    padding: "10px",
+    border: "1px solid black",
+    bottom: "80px",
+    right: "25px",
+    height: "400px",
+    width: "350px",
+    display: "none",
     "z-index": 1,
   });
 
@@ -128,11 +168,11 @@ const makeApp = (products) => {
       "https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923"
     )
     .css({
-      'position': "fixed",
-      'width': "150px",
-      'bottom': "20px",
-      'right': "20px",
-      'cursor': "pointer",
+      position: "fixed",
+      width: "150px",
+      bottom: "20px",
+      right: "20px",
+      cursor: "pointer",
       "z-index": 1,
     });
 
