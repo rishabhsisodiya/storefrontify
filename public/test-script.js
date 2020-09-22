@@ -23,7 +23,7 @@ const shop = Shopify.shop;
 const popupOverlay = $(`
 <div></div>
 `).css({
-    'visibility': 'hidden',
+    'visibility': 'visible',
   'position': 'absolute',
   'background': '#ffffff',
   'border': '3px solid #666666',
@@ -31,7 +31,17 @@ const popupOverlay = $(`
   'height': '50%',
   'left': '25%',
 });
-
+const popverContent = $(`
+    <div>
+        <h2>Pop-Up</h2>
+        <p> This is an example pop-up that you can make using jQuery.</p>
+        <!--popup's close button-->
+        <button>Close</button>
+    </div>
+`).css({
+    'visibility':'visible'
+})
+popupOverlay.append(popverContent)
 body.append(popupOverlay)
 
 
