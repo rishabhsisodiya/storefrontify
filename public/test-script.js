@@ -74,8 +74,10 @@ const popoverContent = $(`
             <h3 style="font-size: 1rem;">Receive the latest trends and the best out of the best.</h3>
         </div>
         <div class="popoverForm" style="display:flex;justify-content:center; align-items:center;height: 20%;">
-            <input id="cEmail" type="email" style="margin-right: 1%;margin-left: 1%;border: 1px solid lightgray;border-radius: 10px" placeholder="Email" />
-            <button id="sendemailbutton" style="color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">Get Superb Dresses</button>
+            <input id="cEmail" type="email" style="width:50%; margin-right: 1%;margin-left: 1%;border: 1px solid lightgray;border-radius: 10px" placeholder="Email" />
+            <button id="sendemailbutton" style="width:30%; color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">
+            <p style="color: white;font-size: 1rem;font-weight: bold;">Get Superb Dresses</p>
+            </button>
         </div>
     </div>
 `).css({
