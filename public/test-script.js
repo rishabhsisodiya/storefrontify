@@ -62,7 +62,7 @@ const popoverContent = $(`
             style="color: black;float:right;font-size:30px;font-weight:bold; cursor:pointer"
             >&times;
             </span>
-        <div>
+        </div>
         <div class="popoverImage" style="justify-content:center; align-items:center width: 100%;height: 50%;padding-left: 5%;padding-right: 5%;">
             <img 
             src="https://bucket.mlcdn.com/a/2384/2384591/images/6774149206a58f05547bc10c499248404c907d7b.jpeg/e11c41a0eb4fb1bb73c36636ec16d818a8289d3e.jpeg" 
@@ -173,7 +173,7 @@ const makeApp = (products) => {
     height: "400px",
     width: "350px",
     display: "none",
-    "z-index": 3,
+    "z-index": 1,
   });
 
   const bestSellerButton = $("<img/>")
