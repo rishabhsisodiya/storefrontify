@@ -40,21 +40,25 @@ const shop = Shopify.shop;
 const popupOverlay = $(`
 <div></div>
 `).css({
-  visibility: "visible",
-  position: "fixed",
-  background: "#ffffff",
-  border: "3px solid #666666",
-  width: "50%",
-  height: "70%",
-  left: "25%",
-  bottom: "25%",
+  "position": "fixed",
+  "background": "rgb(0,0,0,0.4)",
+  "display":"flex",
+  "justify-content":"center",
+  "align-items":"center",
+  "border-radius":"10px",
+  "width": "100vw",
+  "height": "100vh",
+  "left": "0",
+  "right":"0",
+  "bottom": "0",
+  "top":"0",
   "z-index": 1,
 });
 const popoverContent = $(`
     <div>
         <span 
         class="closePopover" 
-        style="color: #aaaaaa;float:right;font-size:28px;font-weight:bold; pointer:cursor"
+        style="color: #aaaaaa;float:right;font-size:28px;font-weight:bold; cursor:pointer"
         >&times;
         </span>
         <div style="justify-content:center; align-items:center">
@@ -64,8 +68,8 @@ const popoverContent = $(`
             />
         </div>
         <div style="justify-content:center; align-items:center">
-            <h1>Get on our list!</h1>
-            <p>Receive the latest trends and the best out of the best.</p>
+            <h1 style="font-weight: bold;text-align: center;">Get on our list!</h1>
+            <p style="font-size: 1rem;">Receive the latest trends and the best out of the best.</p>
         </div>
         <div style="display:flex; padding:10px;justify-content:center; align-items:center">
             <input id="cEmail" type="email"  placeholder="Email" />
