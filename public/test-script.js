@@ -54,22 +54,22 @@ const popoverContent = $(`
     <div>
         <span 
         class="closePopover" 
-        style="color: #aaaaaa,float:right,font-size:28px,font-weight:bold, pointer:cursor"
+        style="color: #aaaaaa;float:right;font-size:28px;font-weight:bold; pointer:cursor"
         >&times;
         </span>
-        <div style="justify-content:center, align-items:center">
+        <div style="justify-content:center; align-items:center">
             <img 
             src="https://bucket.mlcdn.com/a/2384/2384591/images/6774149206a58f05547bc10c499248404c907d7b.jpeg/e11c41a0eb4fb1bb73c36636ec16d818a8289d3e.jpeg" 
             style="width:100%"
             />
         </div>
-        <div style="justify-content:center, align-items:center">
+        <div style="justify-content:center; align-items:center">
             <h1>Get on our list!</h1>
             <p>Receive the latest trends and the best out of the best.</p>
         </div>
-        <div style="display:flex, padding:10px,justify-content:center, align-items:center">
+        <div style="display:flex; padding:10px;justify-content:center; align-items:center">
             <input id="cEmail" type="email"  placeholder="Email" />
-            <button id="sendemailbutton" style="color:#212529,border-radius:10px">Get Superb Dresses</button>
+            <button id="sendemailbutton" style="color:#212529;border-radius:10px">Get Superb Dresses</button>
         </div>
         
 
