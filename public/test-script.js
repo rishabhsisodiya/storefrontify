@@ -40,13 +40,15 @@ const makeApp = (products) => {
     )
     .css({
         'position': 'fixed',
+        'background-color': '#ffffff',
         'padding': '10px',
         'border': '1px solid black',
         'bottom': '80px',
         'right': '25px',
         'height': '400px',
         'width': '350px',
-        'display': 'none'
+        'display': 'none',
+        'z-index':1,
     })
 
     const bestSellerButton = $('<img/>').attr('src', 'https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923')
@@ -56,6 +58,7 @@ const makeApp = (products) => {
             'bottom': '20px',
             'right': '20px',
             'cursor': 'pointer',
+            'z-index':1,
         })
 
         body.append(bestSellerButton);
