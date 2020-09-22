@@ -48,19 +48,23 @@ const popupOverlay = $(`
   'bottom':'25%',
   'z-index':1
 })
-const popverContent = $(`
+const popoverContent = $(`
     <div>
         <h2>Pop-Up</h2>
         <p> This is an example pop-up that you can make using jQuery.</p>
-        <!--popup's close button-->
-        <button>Close</button>
     </div>
 `).css({
     'visibility':'visible',
     'z-index':1
 })
-// popupOverlay.append(popverContent)
-// body.append(popupOverlay)
+const closeButton = $(`<button>Close</button>`)
+popoverContent.append(closeButton)
+popupOverlay.append(popoverContent)
+body.append(popupOverlay)
+
+closeButton.click( ()=>{
+    popupOverlay.slideToggle()
+} )
 
 
 const makeApp = (products) => {
