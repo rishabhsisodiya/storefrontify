@@ -50,8 +50,9 @@ const popupOverlay = $(`
 })
 const popoverContent = $(`
     <div>
-        <h2>Pop-Up</h2>
-        <p> This is an example pop-up that you can make using jQuery.</p>
+        <h1>Get on our list!<h1>
+        <p>Receive the latest trends and the best out of the best.</p>
+        <input type="email"  placeholder="Email" />
     </div>
 `).css({
     'visibility':'visible',
@@ -59,6 +60,13 @@ const popoverContent = $(`
 })
 const closeButton = $(`<button>Close</button>`)
 popoverContent.append(closeButton)
+
+const popupImage = $("<img/>")
+.attr(
+  "src",
+  "https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923"
+)
+popupOverlay.append(popupImage)
 popupOverlay.append(popoverContent)
 body.append(popupOverlay)
 
