@@ -23,7 +23,7 @@ const shop = Shopify.shop;
 const popupImage = $("<img/>")
 .attr(
   "src",
-  "./pop.jpg"
+  "https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923"
 ).css({
     'visibility': 'visible',
   'position': 'fixed',
