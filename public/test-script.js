@@ -58,14 +58,21 @@ const popoverContent = $(`
     'visibility':'visible',
     'z-index':1
 })
-const closeButton = $(`<button>Close</button>`)
-popoverContent.append(closeButton)
+const getEmailButton = $(`<button>Get Superb Dresses </button>`)
+const closeButton = $(`<span>&times;</span>`).css({
+    'color': '#aaaaaa',
+  'float': 'right',
+  'font-size': '28px',
+  'font-weight': 'bold',
+})
+popoverContent.append(getEmailButton)
 
 const popupImage = $("<img/>")
 .attr(
   "src",
   "https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923"
 )
+popupOverlay.append(closeButton)
 popupOverlay.append(popupImage)
 popupOverlay.append(popoverContent)
 body.append(popupOverlay)
