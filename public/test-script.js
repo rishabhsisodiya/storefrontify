@@ -56,27 +56,27 @@ const popupOverlay = $(`
 });
 const popoverContent = $(`
     <div>
-        <span 
-        class="closePopover" 
-        style="color: #aaaaaa;float:right;font-size:28px;font-weight:bold; cursor:pointer"
-        >&times;
-        </span>
-        <div style="justify-content:center; align-items:center">
+        <div style="height: 5%;">
+            <span 
+            class="closePopover" 
+            style="color: black;float:right;font-size:30px;font-weight:bold; cursor:pointer"
+            >&times;
+            </span>
+        <div>
+        <div class="popoverImage" style="justify-content:center; align-items:center width: 100%;height: 50%;padding-left: 5%;padding-right: 5%;">
             <img 
             src="https://bucket.mlcdn.com/a/2384/2384591/images/6774149206a58f05547bc10c499248404c907d7b.jpeg/e11c41a0eb4fb1bb73c36636ec16d818a8289d3e.jpeg" 
-            style="width:100%"
+            style="width:100%; height: 100%; object-fit: cover;"
             />
         </div>
-        <div style="justify-content:center; align-items:center">
-            <h1 style="font-weight: bold;text-align: center;">Get on our list!</h1>
-            <p style="font-size: 1rem;">Receive the latest trends and the best out of the best.</p>
+        <div class="popoverContent" style="justify-content:center; align-items:center height: 25%;padding: 2%; text-align:center">
+            <h1 style="font-weight: bold;">Get on our list!</h1>
+            <h3 style="font-size: 1rem;">Receive the latest trends and the best out of the best.</h3>
         </div>
-        <div style="display:flex; padding:10px;justify-content:center; align-items:center">
-            <input id="cEmail" type="email"  placeholder="Email" />
-            <button id="sendemailbutton" style="color:#212529;border-radius:10px">Get Superb Dresses</button>
+        <div class="popoverForm" style="display:flex;justify-content:center; align-items:center;height: 20%;">
+            <input id="cEmail" type="email" style="margin-right: 1%;margin-left: 1%;border: 1px solid lightgray;border-radius: 10px" placeholder="Email" />
+            <button id="sendemailbutton" style="color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">Get Superb Dresses</button>
         </div>
-        
-
     </div>
 `).css({
   visibility: "visible",
@@ -90,6 +90,8 @@ const popoverContent = $(`
   bottom: "10%",
   background: "whitesmoke",
   "border-radius": "10px",
+  "max-width": "700px",
+"max-height": "500px",
 });
 
 
@@ -100,7 +102,7 @@ $(".closePopover").click(() => {
     popupOverlay.slideToggle();
   });
   
-  ("#sendemailbutton").click(() => {
+$("#sendemailbutton").click(() => {
     alert($("#cEmail").val());
     $("#cEmail").val("");
   });
@@ -171,7 +173,7 @@ const makeApp = (products) => {
     height: "400px",
     width: "350px",
     display: "none",
-    "z-index": 1,
+    "z-index": 3,
   });
 
   const bestSellerButton = $("<img/>")
