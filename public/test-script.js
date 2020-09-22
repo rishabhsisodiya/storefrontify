@@ -82,6 +82,14 @@ const popoverContent = $(`
   visibility: "visible",
   "z-index": 1,
   padding: "10px",
+  width: "85%",
+  height: "70%",
+  right: "10%",
+  left: "10%",
+  top: "10%",
+  bottom: "10%",
+  background: "whitesmoke",
+  "border-radius": "10px",
 });
 
 
