@@ -28,6 +28,9 @@ var products = [];
 
 router.get('/api/products', async (ctx) => {
   try {
+    ctx.header ={
+      'Access-Control-Allow-Origin':'*',
+    }
     ctx.body = {
       status: 'success',
       data: products
