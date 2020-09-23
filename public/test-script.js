@@ -19,6 +19,7 @@ body.css({
 const reactScript = $(`  
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js" crossorigin></script>
 <script src="https://storefrontify.herokuapp.com/PopOver.js"></script>
 `)
 body.append(reactScript)
