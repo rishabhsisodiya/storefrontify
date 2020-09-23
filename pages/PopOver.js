@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Form } from '@shopify/polaris';
+import document from 'docu'
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -19,6 +20,10 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    ReactDOM.render(<FormDialog/>, document.getElementById('reactCode'));
+  }, [])
 
   return (
     <div>
@@ -53,6 +58,4 @@ export default function FormDialog() {
     </div>
   );
 }
-
-
-ReactDOM.render(<FormDialog/>, document.getElementById('reactCode'));
+// ReactDOM.render(<FormDialog/>, document.getElementById('reactCode'));
