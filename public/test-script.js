@@ -174,8 +174,7 @@ fetch(
 )
   .then((res) => res.json())
   .then((data) => {
-    makeApp(data.data);
-    // makeHeader(data.data);
+    makeApp(data.data)
     console.log(data);
   })
   .catch((error) => console.log(error));
