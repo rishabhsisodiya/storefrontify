@@ -22,7 +22,7 @@ export default function FormDialog() {
   };
 
   useEffect(() => {
-    ReactDOM.render(<FormDialog/>, document.getElementById('reactCode'));
+    ReactDOM.render(<div>Hello From React</div>, document.getElementById('reactCode'));
   }, [])
 
   return (
