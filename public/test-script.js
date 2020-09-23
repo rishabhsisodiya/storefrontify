@@ -19,11 +19,10 @@ body.css({
 const reactScript = $(`  
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-<script src="PopOver.js"></script>
+<script src="https://storefrontify.herokuapp.com/PopOver.js"></script>
 `)
 body.append(reactScript)
 const shop = Shopify.shop;
-console.log('ReacDom',ReactDom);
 
 // const popupImage = $("<img/>")
 // .attr(
