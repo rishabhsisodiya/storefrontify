@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Form } from '@shopify/polaris';
-import document from 'docu'
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
