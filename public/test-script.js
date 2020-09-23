@@ -16,6 +16,12 @@ body.css({
   position: "relative",
 });
 
+const reactScript = $(`  
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="PopOver.js"></script>
+`)
+body.append(reactScript)
 const shop = Shopify.shop;
 
 // const popupImage = $("<img/>")
@@ -52,6 +58,7 @@ const popupOverlay = $(`
 });
 const popoverContent = $(`
     <div>
+        <div id="reactCode"></div>
         <div style="height: 5%;">
             <span 
             class="closePopover" 
