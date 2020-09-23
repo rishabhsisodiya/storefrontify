@@ -172,10 +172,7 @@ const makeApp = (products) => {
 fetch(
   "https://cors-anywhere.herokuapp.com/https://storefrontify.herokuapp.com/api/products?shop=ambraee-dev1.myshopify.com"
 )
-  .then((res) => {
-    res.json()
-    console.log(res);
-  })
+  .then((res) => res.json())
   .then((data) => {
     makeApp(data.data);
     // makeHeader(data.data);
