@@ -73,9 +73,9 @@ const popoverContent = $(`
             <h1 style="font-weight: bold;">Get on our list!</h1>
             <h3 style="font-size: 1rem;">Receive the latest trends and the best out of the best.</h3>
         </div>
-        <div class="popoverForm" style="display:flex;justify-content:center; align-items:center;height: 20%;">
+        <div class="popoverForm" style="display:flex;flex-wrap: wrap;justify-content:center; align-items:center;height: 20%;">
             <input id="cEmail" type="email" style="width:50%; margin-right: 1%;margin-left: 1%;border: 1px solid lightgray;border-radius: 10px" placeholder="Email" />
-            <button id="sendemailbutton" style="width:30%; color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">
+            <button id="sendemailbutton" style="width:max-content; max-width: 170px; color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">
             <p style="color: white;font-size: 1rem;font-weight: bold;">Get Superb Dresses</p>
             </button>
         </div>
@@ -85,7 +85,6 @@ const popoverContent = $(`
   "z-index": 1,
   padding: "10px",
   width: "85%",
-  height: "70%",
   right: "10%",
   left: "10%",
   top: "10%",
