@@ -20,9 +20,49 @@ const handle = app.getRequestHandler();
 
 const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY, API_VERSION } = process.env;
 
+const server = new Koa();
+const router = new KoaRouter();
+
+var products = [];
+
+router.get("/api/products", async (ctx) => {
+  try {
+    // ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.body = {
+      status: "success",
+      data: products,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post("/api/products", koaBody(), async (ctx) => {
+  try {
+    const body = ctx.request.body;
+    await products.push(body);
+    ctx.body = "Item Added";
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete("/api/products", koaBody(), async (ctx) => {
+  try {
+    products = [];
+    ctx.body = "All items deleted!";
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Router Middleware
+server.use(router.allowedMethods());
+server.use(router.routes());
+
 app.prepare().then(() => {
-  const server = new Koa();
-  const router = new KoaRouter();
+  // const server = new Koa();
+  // const router = new KoaRouter();
   server.use(session({ secure: true, sameSite: "none" }, server));
   server.keys = [SHOPIFY_API_SECRET_KEY];
 
@@ -48,47 +88,13 @@ app.prepare().then(() => {
         // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         // ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
         ctx.redirect("/");
-        var products = [];
 
-        router.get("/api/products", async (ctx) => {
-          try {
-            // ctx.set('Access-Control-Allow-Origin', '*');
-            ctx.body = {
-              status: "success",
-              data: products,
-            };
-          } catch (error) {
-            console.log(error);
-          }
-        });
-
-        router.post("/api/products", koaBody(), async (ctx) => {
-          try {
-            const body = ctx.request.body;
-            await products.push(body);
-            ctx.body = "Item Added";
-          } catch (error) {
-            console.log(error);
-          }
-        });
-
-        router.delete("/api/products", koaBody(), async (ctx) => {
-          try {
-            products = [];
-            ctx.body = "All items deleted!";
-          } catch (error) {
-            console.log(error);
-          }
-        });
         // uncomment below code to add subscription billing page for your app
         //  await getSubscriptionUrl(ctx, accessToken, shop);
       },
     })
   );
 
-  // Router Middleware
-  server.use(router.allowedMethods());
-  server.use(router.routes());
   server.use(graphQLProxy({ version: ApiVersion.October19 }));
   server.use(verifyRequest());
   server.use(async (ctx) => {
