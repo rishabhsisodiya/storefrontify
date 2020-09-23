@@ -23,6 +23,7 @@ const reactScript = $(`
 `)
 body.append(reactScript)
 const shop = Shopify.shop;
+console.log('ReacDom',ReactDom);
 
 // const popupImage = $("<img/>")
 // .attr(
