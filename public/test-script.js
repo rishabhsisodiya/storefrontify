@@ -18,10 +18,6 @@ body.css({
 
 const shop = Shopify.shop;
 
-{
-  /* <h2>jQuery Pop-Up Example</h2>
-<button class="open">Open</button> */
-}
 // const popupImage = $("<img/>")
 // .attr(
 //   "src",
@@ -107,7 +103,7 @@ $("#sendemailbutton").click(() => {
     alert($("#cEmail").val());
     $("#cEmail").val("");
   });
-console.log('script successful');
+console.log('script');
 // const sendEmailButton = $(`<button>Get Superb Dresses </button>`).css({
 //   "text-align": "center",
 //   "vertical-align": "middle",
