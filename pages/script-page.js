@@ -10,6 +10,7 @@ import {
   Spinner,
   Select,
 } from "@shopify/polaris";
+import { useState } from "react";
 
 const CREATE_SCRIPT_TAG = gql`
   mutation scriptTagCreate($input: ScriptTagInput!) {
