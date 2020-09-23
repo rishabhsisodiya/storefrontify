@@ -1,105 +1,101 @@
-require('isomorphic-fetch');
-const dotenv = require('dotenv');
-const Koa = require('koa');
-const KoaRouter = require('koa-router');
-const next = require('next');
-const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
-const { verifyRequest } = require('@shopify/koa-shopify-auth');
-const session = require('koa-session');
-const koaBody = require('koa-body')
-
+require("isomorphic-fetch");
+const dotenv = require("dotenv");
+const Koa = require("koa");
+const KoaRouter = require("koa-router");
+const next = require("next");
+const { default: createShopifyAuth } = require("@shopify/koa-shopify-auth");
+const { verifyRequest } = require("@shopify/koa-shopify-auth");
+const session = require("koa-session");
+const koaBody = require("koa-body");
 
 dotenv.config();
-const { default: graphQLProxy } = require('@shopify/koa-shopify-graphql-proxy');
-const { ApiVersion } = require('@shopify/koa-shopify-graphql-proxy');
-const getSubscriptionUrl = require('./server/getSubscriptionUrl');
+const { default: graphQLProxy } = require("@shopify/koa-shopify-graphql-proxy");
+const { ApiVersion } = require("@shopify/koa-shopify-graphql-proxy");
+const getSubscriptionUrl = require("./server/getSubscriptionUrl");
 
 const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== 'production';
+const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY, API_VERSION } = process.env;
 
-const server = new Koa();
-const router = new KoaRouter();
-
-var products = [];
-
-router.get('/api/products', async (ctx) => {
-  try {
-    ctx.header ={
-      'Access-Control-Allow-Origin':'*',
-    }
-    ctx.body = {
-      status: 'success',
-      data: products
-    }
-  } catch (error) {
-    console.log(error)
-  }
-})
-
-router.post('/api/products', koaBody(), async (ctx) => {
-  try {
-    const body = ctx.request.body;
-    await products.push(body)
-    ctx.body = "Item Added"
-  } catch (error) {
-    console.log(error)
-  }
-})
-
-router.delete('/api/products', koaBody(), async (ctx) => {
-  try {
-    products = [];
-    ctx.body = "All items deleted!"
-  } catch (error) {
-    console.log(error)
-  }
-})
-
-// Router Middleware
-server.use(router.allowedMethods());
-server.use(router.routes());
-
-
 app.prepare().then(() => {
-  // const server = new Koa();
-  server.use(session({ secure: true, sameSite: 'none' }, server));
+  const server = new Koa();
+  const router = new KoaRouter();
+  server.use(session({ secure: true, sameSite: "none" }, server));
   server.keys = [SHOPIFY_API_SECRET_KEY];
 
   server.use(
     createShopifyAuth({
       apiKey: SHOPIFY_API_KEY,
       secret: SHOPIFY_API_SECRET_KEY,
-      scopes: ['write_products', 'read_products','write_script_tags','read_script_tags'],
+      scopes: [
+        "write_products",
+        "read_products",
+        "write_script_tags",
+        "read_script_tags",
+      ],
       async afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
-        ctx.cookies.set('shopOrigin', shop, {
+        ctx.cookies.set("shopOrigin", shop, {
           httpOnly: false,
           secure: true,
-          sameSite: 'none'
+          sameSite: "none",
         });
-        ctx.set('X-Content-Type-Options','nosniff')
-        ctx.set('Access-Control-Allow-Origin', '*');
-        ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-        ctx.redirect('/');
+        // ctx.set('X-Content-Type-Options','nosniff')
+        // ctx.set('Access-Control-Allow-Origin', '*');
+        // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        // ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+        ctx.redirect("/");
+        var products = [];
+
+        router.get("/api/products", async (ctx) => {
+          try {
+            ctx.set('Access-Control-Allow-Origin', '*');
+            ctx.body = {
+              status: "success",
+              data: products,
+            };
+          } catch (error) {
+            console.log(error);
+          }
+        });
+
+        router.post("/api/products", koaBody(), async (ctx) => {
+          try {
+            const body = ctx.request.body;
+            await products.push(body);
+            ctx.body = "Item Added";
+          } catch (error) {
+            console.log(error);
+          }
+        });
+
+        router.delete("/api/products", koaBody(), async (ctx) => {
+          try {
+            products = [];
+            ctx.body = "All items deleted!";
+          } catch (error) {
+            console.log(error);
+          }
+        });
         // uncomment below code to add subscription billing page for your app
         //  await getSubscriptionUrl(ctx, accessToken, shop);
       },
-
-    }),
+    })
   );
 
-  server.use(graphQLProxy({version: ApiVersion.October19}));
+  // Router Middleware
+  server.use(router.allowedMethods());
+  server.use(router.routes());
+  server.use(graphQLProxy({ version: ApiVersion.October19 }));
   server.use(verifyRequest());
   server.use(async (ctx) => {
     await handle(ctx.req, ctx.res);
     ctx.respond = false;
     ctx.res.statusCode = 200;
-    return
+    return;
   });
   server.listen(port, () => {
     console.log(`> Ready on http://localhost:${port}`);
