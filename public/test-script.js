@@ -10,11 +10,11 @@
 //     .css({ "background-color": "orange", "text-align": "center" });
 // // };
 
-const body = $("body");
+const body = $('body');
 
 body.css({
-  position: "relative",
-});
+    'position': 'relative'
+})
 
 // const reactScript = $(`  
 // <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
@@ -174,7 +174,8 @@ fetch(
 )
   .then((res) => res.json())
   .then((data) => {
-    makeApp(data.data)
     console.log(data);
+    makeApp(data.data)
+    
   })
   .catch((error) => console.log(error));
