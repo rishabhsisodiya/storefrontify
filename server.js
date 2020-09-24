@@ -24,18 +24,18 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-router.get("/", async(ctx) =>{
-  try {
-    // CORS ISSUE FIX
-    ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('X-Content-Type-Options','nosniff')
-    ctx.body = {
-      status: "redirect success",
-    };
-  } catch (error) {
-    console.log(error);
-  }
-})
+// router.get("/", async(ctx) =>{
+//   try {
+//     // CORS ISSUE FIX
+//     ctx.set('Access-Control-Allow-Origin', '*');
+//     // ctx.set('X-Content-Type-Options','nosniff')
+//     ctx.body = {
+//       status: "redirect success",
+//     };
+//   } catch (error) {
+//     console.log(error);
+//   }
+// })
 router.get("/api/products", async (ctx) => {
   try {
     // CORS ISSUE FIX
@@ -54,6 +54,7 @@ router.post("/api/products", koaBody(), async (ctx) => {
   try {
     const body = ctx.request.body;
     await products.push(body);
+    ctx.set('Access-Control-Allow-Origin', '*');
     ctx.body = "Item Added";
   } catch (error) {
     console.log(error);
@@ -63,6 +64,7 @@ router.post("/api/products", koaBody(), async (ctx) => {
 router.delete("/api/products", koaBody(), async (ctx) => {
   try {
     products = [];
+    ctx.set('Access-Control-Allow-Origin', '*');
     ctx.body = "All items deleted!";
   } catch (error) {
     console.log(error);
