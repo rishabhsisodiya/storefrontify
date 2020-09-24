@@ -17,23 +17,24 @@ const client = new ApolloClient({
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
-    const getShopOriginFromUrl  = () => {
-      var url = new URL(window.location.href);
-      return url.searchParams.get('shop');
-    }
     // To fix third-party session storage is blocked
-    const config = {
-        apiKey: API_KEY,
-        shopOrigin: getShopOriginFromUrl,
-        forceRedirect: true,
-      };
+    // const getShopOriginFromUrl  = () => {
+    //   var url = new URL(window.location.href);
+    //   return url.searchParams.get('shop');
+    // }
+    
+    // const config = {
+    //     apiKey: API_KEY,
+    //     shopOrigin: getShopOriginFromUrl,
+    //     forceRedirect: true,
+    //   };
 
     // Take data from cookies
-    // const config = {
-    //   apiKey: API_KEY,
-    //   shopOrigin: Cookies.get("shopOrigin"),
-    //   forceRedirect: true,
-    // };
+    const config = {
+      apiKey: API_KEY,
+      shopOrigin: Cookies.get("shopOrigin"),
+      forceRedirect: true,
+    };
     return (
       <React.Fragment>
         <Head>
