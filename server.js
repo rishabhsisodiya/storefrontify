@@ -27,7 +27,9 @@ var products = [];
 
 router.get("/api/products", async (ctx) => {
   try {
+    // CORS ISSUE FIX
     ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Content-Type', 'text/javascript')
     // ctx.set('X-Content-Type-Options','nosniff')
     ctx.body = {
       status: "success",
