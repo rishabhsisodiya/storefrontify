@@ -23,23 +23,9 @@ body.css({
 // <script src="https://storefrontify.herokuapp.com/PopOver.js"></script>
 // `)
 // body.append(reactScript)
-// const shop = Shopify.shop;
+const shop = Shopify.shop;
+let closePopup= false;
 
-// const popupImage = $("<img/>")
-// .attr(
-//   "src",
-//   "https://cdn.shopify.com/s/files/1/0325/3174/2765/files/bestseller-button-trans.png?v=1584741923"
-// ).css({
-//     'visibility': 'visible',
-//   'position': 'fixed',
-//   'background': '#ffffff',
-//   'border': '3px solid #666666',
-//   'width': '50%',
-//   'height': '50%',
-//   'left': '25%',
-//   'z-index':1
-// });
-// body.append(popupImage)
 const popupOverlay = $(`
 <div></div>
 `).css({
@@ -100,18 +86,22 @@ const popoverContent = $(`
 
 
 popupOverlay.append(popoverContent);
-body.append(popupOverlay);
+if (!closePopup) {
+  body.append(popupOverlay);  
+}
 
-// $(".closePopover").click(() => {
-//     popupOverlay.slideToggle();
-//   });
+
+
+// Close button handling
+$(".closePopover").click(() => {
+    closePopup =true;
+    popupOverlay.slideToggle();
+  });
   
-// $("#sendemailbutton").click(() => {
-//     alert($("#cEmail").val());
-//     $("#cEmail").val("");
-//   });
-// console.log('script');
-// 
+$("#sendemailbutton").click(() => {
+    alert($("#cEmail").val());
+    $("#cEmail").val("");
+  });
 
 //  Best Seller APP
 const makeApp = (products) => {
