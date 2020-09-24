@@ -42,7 +42,7 @@ router.get("/api/products", async (ctx) => {
     ctx.set('Access-Control-Allow-Origin', '*');
     // when not logged in shopify admin app script is blocked by browser without proper auth
     // so content type is nosniff
-    ctx.set('X-Content-Type-Options','nosniff');
+    // ctx.set('X-Content-Type-Options','nosniff');
     ctx.body = {
       status: "success",
       data: products,
