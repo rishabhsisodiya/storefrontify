@@ -17,6 +17,8 @@ const client = new ApolloClient({
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
+    // console.log('props:', this.props);
+    console.log(this.props.match.url)
     // To fix third-party session storage is blocked
     // const getShopOriginFromUrl  = () => {
     //   var url = new URL(window.location.href);
