@@ -27,7 +27,8 @@ var products = [];
 
 router.get("/api/products", async (ctx) => {
   try {
-    // ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('X-Content-Type-Options','nosniff')
     ctx.body = {
       status: "success",
       data: products,
