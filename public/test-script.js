@@ -180,3 +180,8 @@ fetch(
 // When we dont call api and just try to access our public folder it throw 
 // SyntaxError: expected expression, got '<'
 // and with warning The script from “https://storefrontify.herokuapp.com/auth?shop=ambraee-dev1.myshopify.com” was loaded even though its MIME type (“text/html”) is not a valid JavaScript MIME
+
+
+// CASE 3: remove popup code
+// The resource from “https://ambraee-dev1.myshopify.com/admin/auth/login” was blocked due to MIME type (“text/html”) mismatch (X-Content-Type-Options: nosniff).
+// warning Loading failed for the <script> with source “https://storefrontify.herokuapp.com/test-script.js?shop=ambraee-dev1.myshopify.com”.
