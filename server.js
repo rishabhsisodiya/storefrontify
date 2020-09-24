@@ -24,18 +24,15 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-// router.get("/", async(ctx) =>{
-//   try {
-//     // CORS ISSUE FIX
-//     ctx.set('Access-Control-Allow-Origin', '*');
-//     // ctx.set('X-Content-Type-Options','nosniff')
-//     ctx.body = {
-//       status: "redirect success",
-//     };
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })
+router.get("/", async(ctx) =>{
+  try {
+    // CORS ISSUE FIX
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
+})
 router.get("/api/products", async (ctx) => {
   try {
     // CORS ISSUE FIX
