@@ -18,18 +18,19 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     // console.log('props:', this.props);
-    console.log('shop value:',this.props?.router.query.shop)
+    const shop= this.props?.router.query.shop;
+    console.log('Shop value:',shop)
     // To fix third-party session storage is blocked
     // const getShopOriginFromUrl  = () => {
     //   var url = new URL(window.location.href);
     //   return url.searchParams.get('shop');
     // }
     
-    // const config = {
-    //     apiKey: API_KEY,
-    //     shopOrigin: getShopOriginFromUrl,
-    //     forceRedirect: true,
-    //   };
+    const config = {
+        apiKey: API_KEY,
+        shopOrigin: getShopOriginFromUrl,
+        forceRedirect: true,
+      };
 
     // Take data from cookies
     const config = {
