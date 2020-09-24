@@ -24,12 +24,22 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-
+router.get("/", async(ctx) =>{
+  try {
+    // CORS ISSUE FIX
+    ctx.set('Access-Control-Allow-Origin', '*');
+    // ctx.set('X-Content-Type-Options','nosniff')
+    ctx.body = {
+      status: "redirect success",
+    };
+  } catch (error) {
+    console.log(error);
+  }
+})
 router.get("/api/products", async (ctx) => {
   try {
     // CORS ISSUE FIX
     ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Content-Type', 'text/javascript')
     // ctx.set('X-Content-Type-Options','nosniff')
     ctx.body = {
       status: "success",
@@ -68,7 +78,6 @@ app.prepare().then(() => {
   // const router = new KoaRouter();
   server.use(session({ secure: true, sameSite: "none" }, server));
   server.keys = [SHOPIFY_API_SECRET_KEY];
-
   server.use(
     createShopifyAuth({
       apiKey: SHOPIFY_API_KEY,
