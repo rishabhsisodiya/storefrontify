@@ -161,10 +161,7 @@ const makeApp = (products) => {
 fetch(
   "https://storefrontify.herokuapp.com/api/products?shop=ambraee-dev1.myshopify.com"
 )
-  .then((res) => {
-    console.log(res);
-    return res.json()
-  })
+  .then((res) => res.json())
   .then((data) => {
     makeApp(data.data)
   })
