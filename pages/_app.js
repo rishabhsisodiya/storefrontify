@@ -18,7 +18,7 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     // console.log('props:', this.props);
-    console.log(this.props.match.url)
+    console.log('url param:',this.props)
     // To fix third-party session storage is blocked
     // const getShopOriginFromUrl  = () => {
     //   var url = new URL(window.location.href);
