@@ -84,7 +84,7 @@ let closePopup = false;
     "max-width": "700px",
     "max-height": "500px",
   });
-
+console.log(closePopup);
   popupOverlay.append(popoverContent);
   if (!closePopup) {
     body.append(popupOverlay);
