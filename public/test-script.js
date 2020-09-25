@@ -110,6 +110,7 @@ let cookieArray = document.cookie.split(';');
 let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
 // let closepopvalue=popupCookieArray[0].split("=")[1];
 // First time visited website , doesn't have closepopup value
+console.log('popup closed: ',popupCookieArray);
 if (!popupCookieArray.length) {
   makePopup()
 }
