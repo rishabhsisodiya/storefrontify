@@ -7,6 +7,8 @@ const { default: createShopifyAuth } = require("@shopify/koa-shopify-auth");
 const { verifyRequest } = require("@shopify/koa-shopify-auth");
 const session = require("koa-session");
 const koaBody = require("koa-body");
+const koaStatic = require("koa-static");
+const mount = require("koa-mount");
 
 dotenv.config();
 const { default: graphQLProxy } = require("@shopify/koa-shopify-graphql-proxy");
@@ -24,15 +26,28 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-// router.get("/", async(ctx) =>{
-//   try {
-//     // CORS ISSUE FIX
-//     ctx.set('Access-Control-Allow-Origin', '*');
-//     ctx.redirect("/");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })
+router.get("/popup", async(ctx) =>{
+  try {
+    // CORS ISSUE FIX
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.body = {
+      status: "success",
+      popup: ctx.cookies.get("closePopup"),
+    };
+  } catch (error) {
+    console.log(error);
+  }
+})
+router.post("/popup", koaBody(), async (ctx) => {
+  try {
+    const closePopup = ctx.request.body;
+    ctx.cookies.set("closePopup", closePopup);
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.body = "Popup will not display now";
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.get("/api/products", async (ctx) => {
   try {
     // CORS ISSUE FIX
@@ -74,6 +89,8 @@ router.delete("/api/products", koaBody(), async (ctx) => {
 server.use(router.allowedMethods());
 server.use(router.routes());
 
+// Mount app on root path using compiled REact app in the dist folder
+server.use(mount("/", koaStatic(__dirname + "/public")));
 app.prepare().then(() => {
   // const server = new Koa();
   // const router = new KoaRouter();

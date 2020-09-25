@@ -24,9 +24,8 @@ body.css({
 // `)
 // body.append(reactScript)
 const shop = Shopify.shop;
-let closePopup = false;
 
-// const makePopUp = () => {
+const makePopUp = () => {
   const popupOverlay = $(`
   <div></div>
   `).css({
@@ -66,7 +65,7 @@ let closePopup = false;
         <div class="popoverForm" style="display:flex;flex-wrap: wrap;justify-content:center; align-items:center;height: 20%;">
             <input id="cEmail" type="email" style="width:50%; margin-right: 1%;margin-left: 1%;border: 1px solid lightgray;border-radius: 10px" placeholder="Email" />
             <button id="sendemailbutton" style="width:max-content; max-width: 170px; color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">
-            <p style="color: white;font-size: 1rem;font-weight: bold;">Get Superb Dresses</p>
+            <p style="color: white;font-weight: bold;">Get Superb Dresses</p>
             </button>
         </div>
     </div>
@@ -84,14 +83,11 @@ let closePopup = false;
     "max-width": "700px",
     "max-height": "500px",
   });
-console.log(closePopup);
+
   popupOverlay.append(popoverContent);
-  if (!closePopup) {
-    body.append(popupOverlay);
-  }
+  body.append(popupOverlay);
 
   $(".closePopover").click(() => {
-    closePopup = true;
     popupOverlay.slideToggle();
   });
 
@@ -99,7 +95,25 @@ console.log(closePopup);
     alert($("#cEmail").val());
     $("#cEmail").val("");
   });
-// };
+};
+
+fetch(
+  "https://storefrontify.herokuapp.com/popup?shop=ambraee-dev1.myshopify.com"
+)
+  .then((res) => res.json())
+  .then((data) => {
+    console.log('Popup Close: ',data.popup);
+    makePopup();
+  })
+  .catch((error) => console.log(error));
+
+
+
+
+
+
+
+
 //  Best Seller APP
 const makeApp = (products) => {
   const bestSellerContainer = $(
