@@ -93,9 +93,13 @@ const makePopup = () => {
 
   $("#sendemailbutton").click(() => {
     const email =$("#cEmail").val();
-    $.post('/api/send', email,  function(data, status, jqXHR) {// success callback
-                alert('status: ' + status + ', data: ' + data);
-        })
+    $.post('https://storefrontify.herokuapp.com/api/send', {email:email}, function(data, status, xhr) {
+        
+      alert(status + ':' + data);
+
+  }).done(function() { alert('Thank You!'); })
+        .fail(function(jqxhr, settings, ex) { alert('Something went wrong!!.Pleas try again later, ' + ex); });
+
     $("#cEmail").val("");
   });
 };

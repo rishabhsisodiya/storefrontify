@@ -41,11 +41,18 @@ router.get("/popup", async(ctx) =>{
 router.post("/api/send", koaBody(), async (ctx) => {
   try {
     const email = ctx.request.body;
-    // save to database
-    console.log(email);
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(email)){
+      ctx.body = "Thank You for Subscription!!!";
+      // save to database
+      console.log(email);
+    }else{
+      ctx.body = "Entered wrong email. Please try again";
+    }
+    
     ctx.cookies.set("closePopup", true);
     ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.body = "Popup will not display now";
+    
   } catch (error) {
     console.log(error);
   }
