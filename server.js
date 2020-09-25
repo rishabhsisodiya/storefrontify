@@ -47,12 +47,12 @@ router.post("/api/send", koaBody(), async (ctx) => {
       // save to database
       console.log(email);
     }else{
-      ctx.body = "Entered wrong email. Please try again";
+      ctx.body = "Entered wrong email. Please try again!!";
     }
     
     ctx.cookies.set("closePopup", true);
     ctx.set('Access-Control-Allow-Origin', '*');
-    
+    console.log('mail in cookie:',ctx.cookies.get("closePopup"));
   } catch (error) {
     console.log(error);
   }
