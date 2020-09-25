@@ -26,7 +26,7 @@ body.css({
 const shop = Shopify.shop;
 let closePopup = false;
 
-const makePopUp = () => {
+// const makePopUp = () => {
   const popupOverlay = $(`
   <div></div>
   `).css({
@@ -99,7 +99,7 @@ const makePopUp = () => {
     alert($("#cEmail").val());
     $("#cEmail").val("");
   });
-};
+// };
 //  Best Seller APP
 const makeApp = (products) => {
   const bestSellerContainer = $(
@@ -161,7 +161,7 @@ fetch(
   .then((res) => res.json())
   .then((data) => {
     makeApp(data.data);
-    makePopUp();
+    // makePopUp();
   })
   .catch((error) => console.log(error));
 

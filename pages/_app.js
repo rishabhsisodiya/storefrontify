@@ -20,11 +20,6 @@ class MyApp extends App {
     // console.log('props:', this.props);
     // const shop= this.props?.router.query.shop;
     // console.log('Shop value:',shop)
-    // // To fix third-party session storage is blocked
-    // const getShopOriginFromUrl  = () => {
-    //   var url = new URL(window.location.href);
-    //   return url.searchParams.get('shop');
-    // }
     
     // const config = {
     //     apiKey: API_KEY,
