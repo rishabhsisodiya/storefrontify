@@ -67,11 +67,6 @@ function ScriptPage() {
   return (
     <Page>
       <Layout>
-        <Layout.Section>
-          <Card title="These are the Script Tags:" sectioned>
-            <p>Create or Delete a Script Tag</p>
-          </Card>
-        </Layout.Section>
         <Layout.Section secondary>
           <Card title="Script Tag" sectioned>
             <Select
@@ -101,6 +96,14 @@ function ScriptPage() {
           </Card>
         </Layout.Section>
         <Layout.Section>
+          <Card title="Information:" sectioned>
+            <p>Display Scope</p>
+              <ul>ALL: Run script and share script generated data in All pages</ul>
+              <ul>ONLINE_STORE: Run script in store Home page and doesn't share data with other pages</ul>
+              <ul>ORDER_STATUS: Run script in order page and doesn't share data with other pages</ul>
+          </Card>
+        </Layout.Section>
+        <Layout.Section>
           <Card>
             <ResourceList
               showHeader
@@ -114,6 +117,9 @@ function ScriptPage() {
                         <p>{item.node.id}</p>
                       </Stack.Item>
                       <Stack.Item>
+                        <p>{item.node.displayScope}</p>
+                      </Stack.Item>
+                      <Stack.Item>
                         <Button
                           type="submit"
                           onClick={() => {
@@ -124,6 +130,7 @@ function ScriptPage() {
                               refetchQueries: [{ query: QUERY_SCRIPTTAGS }],
                             });
                           }}
+                          destructive
                         >
                           Delete Script Tag
                         </Button>
