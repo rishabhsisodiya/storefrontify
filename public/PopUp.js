@@ -1,30 +1,30 @@
-const body = $('body');
+const body = $("body");
 
 body.css({
-    'position': 'relative'
-})
+  position: "relative",
+});
 
 const shop = Shopify.shop;
 
-
-const popupOverlay = $(`
-<div></div>
-`).css({
-  "position": "fixed",
-  "background": "rgb(0,0,0,0.4)",
-  "display":"flex",
-  "justify-content":"center",
-  "align-items":"center",
-  "border-radius":"10px",
-  "width": "100vw",
-  "height": "100vh",
-  "left": "0",
-  "right":"0",
-  "bottom": "0",
-  "top":"0",
-  "z-index": 1,
-});
-const popoverContent = $(`
+const makePopup = () => {
+  const popupOverlay = $(`
+  <div></div>
+  `).css({
+    position: "fixed",
+    background: "rgb(0,0,0,0.4)",
+    display: "flex",
+    "justify-content": "center",
+    "align-items": "center",
+    "border-radius": "10px",
+    width: "100vw",
+    height: "100vh",
+    left: "0",
+    right: "0",
+    bottom: "0",
+    top: "0",
+    "z-index": 1,
+  });
+  const popoverContent = $(`
     <div>
         <div style="height: 5%;">
             <span 
@@ -46,37 +46,50 @@ const popoverContent = $(`
         <div class="popoverForm" style="display:flex;flex-wrap: wrap;justify-content:center; align-items:center;height: 20%;">
             <input id="cEmail" type="email" style="width:50%; margin-right: 1%;margin-left: 1%;border: 1px solid lightgray;border-radius: 10px" placeholder="Email" />
             <button id="sendemailbutton" style="width:max-content; max-width: 170px; color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">
-            <p style="color: white;font-size: 1rem;font-weight: bold;">Get Superb Dresses</p>
+            <p style="color: white;font-weight: bold;">Get Superb Dresses</p>
             </button>
         </div>
     </div>
 `).css({
-  visibility: "visible",
-  "z-index": 1,
-  padding: "10px",
-  width: "85%",
-  right: "10%",
-  left: "10%",
-  top: "10%",
-  bottom: "10%",
-  background: "whitesmoke",
-  "border-radius": "10px",
-  "max-width": "700px",
-"max-height": "500px",
-});
+    visibility: "visible",
+    "z-index": 1,
+    padding: "10px",
+    width: "85%",
+    right: "10%",
+    left: "10%",
+    top: "10%",
+    bottom: "10%",
+    background: "whitesmoke",
+    "border-radius": "10px",
+    "max-width": "700px",
+    "max-height": "500px",
+  });
 
+  popupOverlay.append(popoverContent);
+  body.append(popupOverlay);
 
-popupOverlay.append(popoverContent);
-body.append(popupOverlay);
-
-let clicked= false;
-// Close button handling
-$(".closePopover").click(() => {
+  $(".closePopover").click(() => {
+    document.cookie = "closepopup=true;"
     popupOverlay.slideToggle();
   });
-  
-$("#sendemailbutton").click(() => {
-    alert($("#cEmail").val());
-    $("#cEmail").val("");
-  });
 
+  $("#sendemailbutton").click(() => {
+    const email =$("#cEmail").val();
+    $.post('https://storefrontify.herokuapp.com/api/send', {email:email}, function(data, status, xhr) {
+      alert(data);
+  }).fail(function(jqxhr, settings, ex) { alert('Something went wrong!!.Pleas try again later, ' + ex); });
+
+    $("#cEmail").val("");
+    document.cookie = "closepopup=true;"
+  });
+};
+ 
+// split cookie 
+let cookieArray = document.cookie.split(';');
+// Check our cookie is there or not
+let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
+// let closepopvalue=popupCookieArray[0].split("=")[1];
+// First time visited website , doesn't have closepopup value
+if (!popupCookieArray.length) {
+  makePopup()
+}

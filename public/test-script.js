@@ -10,12 +10,6 @@
 //     .css({ "background-color": "orange", "text-align": "center" });
 // // };
 
-const body = $("body");
-
-body.css({
-  position: "relative",
-});
-
 // const reactScript = $(`
 // <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 // <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
@@ -23,6 +17,13 @@ body.css({
 // <script src="https://storefrontify.herokuapp.com/PopOver.js"></script>
 // `)
 // body.append(reactScript)
+
+const body = $("body");
+
+body.css({
+  position: "relative",
+});
+
 const shop = Shopify.shop;
 
 const makePopup = () => {
@@ -108,21 +109,11 @@ let cookieArray = document.cookie.split(';');
 
 let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
 // let closepopvalue=popupCookieArray[0].split("=")[1];
-console.log('popup value:',popupCookieArray); 
 // First time visited website , doesn't have closepopup value
 if (!popupCookieArray.length) {
   makePopup()
 }
 
-// fetch(
-//   "https://storefrontify.herokuapp.com/popup?shop=ambraee-dev1.myshopify.com"
-// )
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log("Popup Close: ", data.popup);
-//     makePopup();
-//   })
-//   .catch((error) => console.log(error));
 
 //  Best Seller APP
 const makeApp = (products) => {
