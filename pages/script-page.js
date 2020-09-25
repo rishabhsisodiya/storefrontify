@@ -121,7 +121,7 @@ function ScriptPage() {
               renderItem={(item) => {
                 return (
                   <ResourceList.Item id={item.id}>
-                    <Stack>
+                    <Stack distribution="fill">
                       <Stack.Item>
                         <p>{item.node.id}</p>
                       </Stack.Item>
