@@ -38,10 +38,12 @@ router.get("/popup", async(ctx) =>{
     console.log(error);
   }
 })
-router.post("/popup", koaBody(), async (ctx) => {
+router.post("/api/send", koaBody(), async (ctx) => {
   try {
-    const closePopup = ctx.request.body;
-    ctx.cookies.set("closePopup", closePopup);
+    const email = ctx.request.body;
+    // save to database
+    console.log(email);
+    ctx.cookies.set("closePopup", true);
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.body = "Popup will not display now";
   } catch (error) {

@@ -92,7 +92,10 @@ const makePopup = () => {
   });
 
   $("#sendemailbutton").click(() => {
-    alert($("#cEmail").val());
+    const email =$("#cEmail").val();
+    $.post('/api/send', email,  function(data, status, jqXHR) {// success callback
+                alert('status: ' + status + ', data: ' + data);
+        })
     $("#cEmail").val("");
   });
 };
