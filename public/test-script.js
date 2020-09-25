@@ -105,10 +105,11 @@ const makePopup = () => {
  
 // split cookie 
 let cookieArray = document.cookie.split(';');
+
 let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
-let closepopvalue=popupCookieArray[0].split("=")[1];
-console.log('popup value:',closepopvalue); 
-if (!closepopvalue) {
+// let closepopvalue=popupCookieArray[0].split("=")[1];
+console.log('popup value:',popupCookieArray); 
+if (!popupCookieArray) {
   makePopup()
 }
 
