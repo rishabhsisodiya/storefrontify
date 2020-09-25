@@ -88,6 +88,7 @@ const makePopup = () => {
   body.append(popupOverlay);
 
   $(".closePopover").click(() => {
+    document.cookie = "closepopup=true;"
     popupOverlay.slideToggle();
   });
 
@@ -98,18 +99,28 @@ const makePopup = () => {
   }).fail(function(jqxhr, settings, ex) { alert('Something went wrong!!.Pleas try again later, ' + ex); });
 
     $("#cEmail").val("");
+    document.cookie = "closepopup=true;"
   });
 };
+ 
+// split cookie 
+let cookieArray = document.cookie.split(';');
+let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
+let closepopvalue=popupCookieArray[0].split("=")[1];
+console.log('popup value:',closepopvalue); 
+if (!closepopvalue) {
+  makePopup()
+}
 
-fetch(
-  "https://storefrontify.herokuapp.com/popup?shop=ambraee-dev1.myshopify.com"
-)
-  .then((res) => res.json())
-  .then((data) => {
-    console.log("Popup Close: ", data.popup);
-    makePopup();
-  })
-  .catch((error) => console.log(error));
+// fetch(
+//   "https://storefrontify.herokuapp.com/popup?shop=ambraee-dev1.myshopify.com"
+// )
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log("Popup Close: ", data.popup);
+//     makePopup();
+//   })
+//   .catch((error) => console.log(error));
 
 //  Best Seller APP
 const makeApp = (products) => {
