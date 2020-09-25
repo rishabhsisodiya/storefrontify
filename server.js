@@ -53,6 +53,7 @@ router.post("/api/send", koaBody(), async (ctx) => {
     ctx.cookies.set("closePopup", "true");
     ctx.set('Access-Control-Allow-Origin', '*');
     console.log('mail in cookie:',ctx.cookies.get("closePopup"));
+    console.log(ctx.cookies);
   } catch (error) {
     console.log(error);
   }
