@@ -69,12 +69,14 @@ function ScriptPage() {
       <Layout>
         <Layout.Section secondary>
           <Card title="Script Tag" sectioned>
-            <Select
-              label="Display Scope"
-              options={["ALL", "ONLINE_STORE", "ORDER_STATUS"]}
-              value={displayScope}
-              onChange={handleSelectChange}
-            />
+            <div style={{paddingBottom:"25px",paddingTop:"10px"}}>
+              <Select
+                label="Display Scope"
+                options={["ALL", "ONLINE_STORE", "ORDER_STATUS"]}
+                value={displayScope}
+                onChange={handleSelectChange}
+              />
+            </div>
             <Button
               primary
               size="slim"
@@ -96,11 +98,18 @@ function ScriptPage() {
           </Card>
         </Layout.Section>
         <Layout.Section>
-          <Card title="Information:" sectioned>
-            <p>Display Scope</p>
-              <ul>ALL: Run script and share script generated data in All pages</ul>
-              <ul>ONLINE_STORE: Run script in store Home page and doesn't share data with other pages</ul>
-              <ul>ORDER_STATUS: Run script in order page and doesn't share data with other pages</ul>
+          <Card title="Help (Display Scope)" sectioned>
+            <ul style={{marginBottom:"-5px", marginTop:"-10px"}}>
+              ALL: Run script and share script generated data in All pages
+            </ul>
+            <ul style={{marginBottom:"-5px"}}>
+              ONLINE_STORE: Run script in store Home page and doesn't share data
+              with other pages
+            </ul>
+            <ul>
+              ORDER_STATUS: Run script in order page and doesn't share data with
+              other pages
+            </ul>
           </Card>
         </Layout.Section>
         <Layout.Section>
