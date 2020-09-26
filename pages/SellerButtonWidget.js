@@ -38,6 +38,11 @@ const SellerButtonWidget = () => {
 
   return (
     <Page>
+      <div style={{ height:"50px", float: "right" }}>
+        <Button onClick={() => setModal({ open: true })} primary>
+          Select New Product
+        </Button>
+      </div>
       <ResourcePicker
         resourceType="Product"
         showVariants={false}
@@ -58,8 +63,9 @@ const SellerButtonWidget = () => {
             <p>Select Products</p>
           </EmptyState>
         </Layout>
-      ) : <ProductList />
-      }
+      ) : (
+        <ProductList />
+      )}
     </Page>
   );
 };

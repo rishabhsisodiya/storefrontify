@@ -34,9 +34,7 @@ const widgets = () => {
   return (
       <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
-          <Card>
             {selectedWidget}
-          </Card>
         </Tabs>
       </Card>
   );
