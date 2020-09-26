@@ -64,7 +64,7 @@ const PopupWidget = () => {
     </Stack>
   );
 
-  const errorMessage = hasError && (
+  const errorMessage = rejectedFile.length>0 && (
     <Banner
       title="The following images couldn’t be uploaded:"
       status="critical"
