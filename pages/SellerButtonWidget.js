@@ -58,14 +58,8 @@ const SellerButtonWidget = () => {
             <p>Select Products</p>
           </EmptyState>
         </Layout>
-      ) : (
-        <Card>
-          <div style={{ float: "right" }}>
-            <Button onClick={() => setModal({ open: true })} primary>Select New Product</Button>
-          </div>
-          <ProductList />
-        </Card>
-      )}
+      ) : <ProductList />
+      }
     </Page>
   );
 };
