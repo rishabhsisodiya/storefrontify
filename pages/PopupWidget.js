@@ -191,6 +191,7 @@ const PopupWidget = () => {
                       borderRadius: "10px",
                       marginRight: "1%",
                       marginLeft: "1%",
+                      
                     }}
                   >
                     <p style={{ color: "black", fontWeight: "bold" }}>

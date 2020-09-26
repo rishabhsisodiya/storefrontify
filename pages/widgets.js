@@ -1,6 +1,7 @@
 import React, { useState , useCallback} from "react";
 import PopupWidget from "./PopupWidget";
-import { Page, Layout, Card, Tabs } from "@shopify/polaris";
+import { Card, Tabs } from "@shopify/polaris";
+import SellerButton from "./SellerButton";
 
 const widgets = () => {
     const [selected, setSelected] = useState(0);
@@ -24,9 +25,11 @@ const widgets = () => {
     },
   ];
   let selectedWidget;
-//   if (selected == 0) {
+  if (selected == 0) {
       selectedWidget = (<PopupWidget />);
-//   }
+  }else{
+      selectedWidget= (<SellerButton />)
+  }
   return (
       <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
