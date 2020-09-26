@@ -118,11 +118,7 @@ const PopupWidget = () => {
                 }}
               >
                 <img
-                  src={
-                    validImageTypes.indexOf(file.type) > 0
-                      ? window.URL.createObjectURL(file)
-                      : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
-                  }
+                  src={window.URL.createObjectURL(file)}
                   alt={file.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
