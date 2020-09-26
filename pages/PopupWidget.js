@@ -16,8 +16,8 @@ import {
 } from "@shopify/polaris";
 
 const PopupWidget = () => {
-  const [active, setActive] = useState(true);
-  const [files, setFiles] = useState([]);
+  const [active, setActive] = useState(false);
+  const [file, setFile] = useState();
   const [rejectedFiles, setRejectedFiles] = useState([]);
   const [popHeading, setPopHeading] = useState("Get on our list!");
   const [popContent, setPopContent] = useState(
@@ -42,51 +42,43 @@ const PopupWidget = () => {
   const hasError = rejectedFiles.length > 0;
 
   const handleDrop = useCallback(
-    (_droppedFiles, acceptedFiles, rejectedFiles) => {
-      setFiles((files) => [...files, ...acceptedFiles]);
+    (_dropFiles, acceptedFiles, _rejectedFiles) => {
+      setFile((file) => acceptedFiles[0]);
       setRejectedFiles(rejectedFiles);
     },
     []
   );
 
-  const fileUpload = !files.length && <DropZone.FileUpload />;
-  const uploadedFiles = files.length > 0 && (
-    <Stack vertical>
-      {files.map((file, index) => (
-        <Stack alignment="center" key={index}>
-          <Thumbnail
-            size="small"
-            alt={file.name}
-            source={window.URL.createObjectURL(file)}
-          />
-          <div>
-            {file.name} <Caption>{file.size} bytes</Caption>
-          </div>
-        </Stack>
-      ))}
-    </Stack>
-  );
+  const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
-  const errorMessage = hasError && (
-    <Banner
-      title="The following images couldn’t be uploaded:"
-      status="critical"
-    >
-      <List type="bullet">
-        {rejectedFiles.map((file, index) => (
-          <List.Item key={index}>
-            {`"${file.name}" is not supported. File type must be .gif, .jpg, .png or .svg.`}
-          </List.Item>
-        ))}
-      </List>
-    </Banner>
+  const fileUpload = !file && <DropZone.FileUpload />;
+  const uploadedFile = file && (
+    <Stack>
+      <Thumbnail
+        size="small"
+        alt={file.name}
+        source={
+          validImageTypes.indexOf(file.type) > 0
+            ? window.URL.createObjectURL(file)
+            : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
+        }
+      />
+      <div>
+        {file.name} <Caption>{file.size} bytes</Caption>
+      </div>
+    </Stack>
   );
 
   return (
     <Stack vertical>
       {errorMessage}
-      <DropZone accept="image/*" type="image" onDrop={handleDrop}>
-        {uploadedFiles}
+      <DropZone
+        accept="image/*"
+        allowMultiple={false}
+        type="image"
+        onDrop={handleDrop}
+      >
+        {uploadedFile}
         {fileUpload}
       </DropZone>
       <TextField
@@ -106,9 +98,11 @@ const PopupWidget = () => {
       />
       <ButtonGroup>
         <Button onClick={handleModel}>Preview</Button>
-        <Button primary onClick={ ()=> alert('widget Added')}>Add to Store</Button>
+        <Button primary onClick={() => alert("widget Added")}>
+          Add to Store
+        </Button>
       </ButtonGroup>
-      <div style={{ height: "500px" }}>
+      <div>
         <Modal open={active} onClose={handleModel}>
           <Modal.Section>
             <TextContainer>
@@ -123,8 +117,12 @@ const PopupWidget = () => {
                 }}
               >
                 <img
-                  src="https://bucket.mlcdn.com/a/2384/2384591/images/6774149206a58f05547bc10c499248404c907d7b.jpeg/e11c41a0eb4fb1bb73c36636ec16d818a8289d3e.jpeg"
-                  alt="store img"
+                  src={
+                    validImageTypes.indexOf(file.type) > 0
+                      ? window.URL.createObjectURL(file)
+                      : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
+                  }
+                  alt={file.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
@@ -137,8 +135,8 @@ const PopupWidget = () => {
                   padding: "2%",
                 }}
               >
-                <h1>{popHeading}</h1>
-                <p>{popContent}</p>
+                <h1 style={{ fontWeight: "bold" }}>{popHeading}</h1>
+                <h3 style={{ fontSize: "1rem" }}>{popContent}</h3>
               </div>
               <div
                 className="popoverForm"
