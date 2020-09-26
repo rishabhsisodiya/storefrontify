@@ -59,11 +59,11 @@ const PopupWidget = () => {
     <Stack>
       <Thumbnail
         size="small"
-        alt={file.name}
+        alt={file?.name}
         source={imageUrl}
       />
       <div>
-        {file.name} <Caption>{file.size} bytes</Caption>
+        {file?.name} <Caption>{file?.size} bytes</Caption>
       </div>
     </Stack>
   );
@@ -76,7 +76,7 @@ const PopupWidget = () => {
       <List type="bullet">
         {rejectedFiles.map((file, index) => (
           <List.Item key={index}>
-            {`"${file.name}" is not supported. File type must be .gif, .jpg, .png or .svg.`}
+            {`"${file?.name}" is not supported. File type must be .gif, .jpg, .png or .svg.`}
           </List.Item>
         ))}
       </List>
@@ -132,7 +132,7 @@ const PopupWidget = () => {
               >
                 <img
                   src={imageUrl}
-                  alt={file.name}
+                  alt={file?.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
