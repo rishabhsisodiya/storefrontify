@@ -50,17 +50,19 @@ const PopupWidget = () => {
     []
   );
 
-  const imageUrl = () => (window.URL.createObjectURL(file));
-console.log(imageUrl);
-  // const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
-  
+  const validImageTypes = ["image/gif", "image/jpeg", "image/png", "image/svg"];
+
   const fileUpload = !file && <DropZone.FileUpload />;
   const uploadedFile = file && (
     <Stack>
       <Thumbnail
         size="small"
         alt={file?.name}
-        source={imageUrl}
+        source={
+          validImageTypes.indexOf(file?.type) > 0
+            ? window.URL.createObjectURL(file)
+            : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
+        }
       />
       <div>
         {file?.name} <Caption>{file?.size} bytes</Caption>
@@ -131,7 +133,11 @@ console.log(imageUrl);
                 }}
               >
                 <img
-                  src={imageUrl}
+                  src={
+                    validImageTypes.indexOf(file?.type) > 0
+                      ? window.URL.createObjectURL(file)
+                      : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
+                  }
                   alt={file?.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
