@@ -28,7 +28,6 @@ const widgets = () => {
       selectedWidget = (<PopupWidget />);
 //   }
   return (
-    <Page title="Create a widget for Your Store">
       <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
           <Card.Section title={tabs[selected].content}>
@@ -36,7 +35,6 @@ const widgets = () => {
           </Card.Section>
         </Tabs>
       </Card>
-    </Page>
   );
 };
 
