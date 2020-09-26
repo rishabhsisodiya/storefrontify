@@ -8,6 +8,7 @@ import {
   Thumbnail,
   Layout,
   TextField,
+  Card,
 } from "@shopify/polaris";
 
 const PopupWidget = () => {
@@ -19,10 +20,19 @@ const PopupWidget = () => {
   );
   const [textButton, setTextButton] = useState("Subscribe");
 
-  const handleHeadingChange = useCallback((newValue) => setPopHeading(newValue), []);
-  const handleContentChange = useCallback((newValue) => setPopContent(newValue), []);
-  const handleTextChange = useCallback((newValue) => setTextButton(newValue), []);
-  
+  const handleHeadingChange = useCallback(
+    (newValue) => setPopHeading(newValue),
+    []
+  );
+  const handleContentChange = useCallback(
+    (newValue) => setPopContent(newValue),
+    []
+  );
+  const handleTextChange = useCallback(
+    (newValue) => setTextButton(newValue),
+    []
+  );
+
   const hasError = rejectedFiles.length > 0;
 
   const handleDrop = useCallback(
@@ -67,28 +77,30 @@ const PopupWidget = () => {
   );
 
   return (
-    <Stack vertical>
-      {errorMessage}
-      <DropZone accept="image/*" type="image" onDrop={handleDrop}>
-        {uploadedFiles}
-        {fileUpload}
-      </DropZone>
-      <TextField
-        label="Popup Heading"
-        value={popHeading}
-        onChange={handleHeadingChange}
-      />
-      <TextField
-        label="Popup Content"
-        value={popContent}
-        onChange={handleContentChange}
-      />
-      <TextField
-        label="Text on Button"
-        value={textButton}
-        onChange={handleTextChange}
-      />
-    </Stack>
+    <Card>
+      <Stack vertical>
+        {errorMessage}
+        <DropZone accept="image/*" type="image" onDrop={handleDrop}>
+          {uploadedFiles}
+          {fileUpload}
+        </DropZone>
+        <TextField
+          label="Popup Heading"
+          value={popHeading}
+          onChange={handleHeadingChange}
+        />
+        <TextField
+          label="Popup Content"
+          value={popContent}
+          onChange={handleContentChange}
+        />
+        <TextField
+          label="Text on Button"
+          value={textButton}
+          onChange={handleTextChange}
+        />
+      </Stack>
+    </Card>
   );
 };
 
