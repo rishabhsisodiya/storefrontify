@@ -109,7 +109,7 @@ const PopupWidget = () => {
         <Button primary onClick={ ()=> alert('widget Added')}>Add to Store</Button>
       </ButtonGroup>
       <div style={{ height: "500px" }}>
-        <Modal open={active} onClose={handleChange}>
+        <Modal open={active} onClose={handleModel}>
           <Modal.Section>
             <TextContainer>
               <div
