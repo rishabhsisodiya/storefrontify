@@ -18,7 +18,9 @@ import {
 const PopupWidget = () => {
   const [active, setActive] = useState(false);
   const [file, setFile] = useState();
-  const [rejectedFile, setRejectedFile] = useState([]);
+  const [rejectedFiles, setRejectedFiles] = useState([]);
+  const hasError = rejectedFiles.length > 0;
+
   const [popHeading, setPopHeading] = useState("Get on our list!");
   const [popContent, setPopContent] = useState(
     "Receive the latest trends and the best out of the best"
@@ -40,12 +42,12 @@ const PopupWidget = () => {
 
   const handleModel = useCallback(() => setActive(!active), [active]);
 
-  const handleDrop = useCallback(
-    (_dropFiles, acceptedFiles, _rejectedFiles) =>{
-      setFile((file) => acceptedFiles[0])
-      setRejectedFile(rejectedFile[0]);
+  const handleDropZoneDrop = useCallback(
+    (_dropFiles, acceptedFiles, rejectedFiles) => {
+      setFile((file) => acceptedFiles[0]);
+      setRejectedFiles(rejectedFiles);
     },
-    [],
+    []
   );
 
   // const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
@@ -64,13 +66,17 @@ const PopupWidget = () => {
     </Stack>
   );
 
-  const errorMessage = rejectedFile.length>0 && (
+  const errorMessage = hasError && (
     <Banner
       title="The following images couldn’t be uploaded:"
       status="critical"
     >
       <List type="bullet">
-            <p>{`"${rejectedFile.file.name}" is not supported. File type must be .gif, .jpg, .png or .svg.`}</p>
+        {rejectedFiles.map((file, index) => (
+          <List.Item key={index}>
+            {`"${file.name}" is not supported. File type must be .gif, .jpg, .png or .svg.`}
+          </List.Item>
+        ))}
       </List>
     </Banner>
   );
@@ -78,7 +84,12 @@ const PopupWidget = () => {
   return (
     <Stack vertical>
       {errorMessage}
-      <DropZone accept="image/*" type="image" allowMultiple={false} onDrop={handleDrop}>
+      <DropZone
+        accept="image/*"
+        type="image"
+        allowMultiple={false}
+        onDrop={handleDropZoneDrop}
+      >
         {uploadedFile}
         {fileUpload}
       </DropZone>
