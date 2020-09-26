@@ -50,8 +50,8 @@ const PopupWidget = () => {
     []
   );
 
-  // const imageUrl = () => window.URL.createObjectURL(file);
-
+  const imageUrl = () => (window.URL.createObjectURL(file));
+console.log(imageUrl);
   // const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
   
   const fileUpload = !file && <DropZone.FileUpload />;
@@ -60,7 +60,7 @@ const PopupWidget = () => {
       <Thumbnail
         size="small"
         alt={file?.name}
-        source={window?.URL.createObjectURL(file)}
+        source={imageUrl}
       />
       <div>
         {file?.name} <Caption>{file?.size} bytes</Caption>
@@ -131,7 +131,7 @@ const PopupWidget = () => {
                 }}
               >
                 <img
-                  src={window?.URL.createObjectURL(file)}
+                  src={imageUrl}
                   alt={file?.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
