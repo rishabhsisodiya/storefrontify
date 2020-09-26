@@ -39,9 +39,9 @@ const SellerButtonWidget = () => {
   return (
     <Page>
       <div style={{ height:"50px", float: "right" }}>
-        <Button onClick={() => setModal({ open: true })} primary>
+        <button style={{color:"#3f4eae" }} onClick={() => setModal({ open: true })} primary>
           Select New Product
-        </Button>
+        </button>
       </div>
       <ResourcePicker
         resourceType="Product"
