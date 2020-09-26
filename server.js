@@ -26,18 +26,18 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-router.get("/popup", async(ctx) =>{
-  try {
-    // CORS ISSUE FIX
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.body = {
-      status: "success",
-      popup: ctx.cookies.get("closePopup"),
-    };
-  } catch (error) {
-    console.log(error);
-  }
-})
+// router.get("/popup", async(ctx) =>{
+//   try {
+//     // CORS ISSUE FIX
+//     ctx.set('Access-Control-Allow-Origin', '*');
+//     ctx.body = {
+//       status: "success",
+//       popup: "close",
+//     };
+//   } catch (error) {
+//     console.log(error);
+//   }
+// })
 router.post("/api/send", koaBody(), async (ctx) => {
   try {
     const email = ctx.request.body;
@@ -49,11 +49,7 @@ router.post("/api/send", koaBody(), async (ctx) => {
     }else{
       ctx.body = "Entered wrong email. Please try again!!";
     }
-    
-    ctx.cookies.set("closePopup", "true");
     ctx.set('Access-Control-Allow-Origin', '*');
-    console.log('mail in cookie:',ctx.cookies.get("closePopup"));
-    console.log(ctx.cookies);
   } catch (error) {
     console.log(error);
   }
