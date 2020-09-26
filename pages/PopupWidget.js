@@ -18,7 +18,7 @@ import {
 const PopupWidget = () => {
   const [active, setActive] = useState(false);
   const [file, setFile] = useState();
-  const [rejectedFiles, setRejectedFiles] = useState([]);
+  const [rejectedFile, setRejectedFile] = useState([]);
   const [popHeading, setPopHeading] = useState("Get on our list!");
   const [popContent, setPopContent] = useState(
     "Receive the latest trends and the best out of the best"
@@ -41,14 +41,14 @@ const PopupWidget = () => {
   const handleModel = useCallback(() => setActive(!active), [active]);
 
   const handleDrop = useCallback(
-    (_dropFiles, acceptedFiles, _rejectedFiles) => {
-      setFile((file) => acceptedFiles[0]);
-      setRejectedFiles(rejectedFiles);
+    (_dropFiles, acceptedFiles, _rejectedFiles) =>{
+      setFile((file) => acceptedFiles[0])
+      setRejectedFile(rejectedFile[0]);
     },
-    []
+    [],
   );
 
-  const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+  // const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
   const fileUpload = !file && <DropZone.FileUpload />;
   const uploadedFile = file && (
@@ -56,11 +56,7 @@ const PopupWidget = () => {
       <Thumbnail
         size="small"
         alt={file.name}
-        source={
-          validImageTypes.indexOf(file.type) > 0
-            ? window.URL.createObjectURL(file)
-            : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
-        }
+        source={window.URL.createObjectURL(file)}
       />
       <div>
         {file.name} <Caption>{file.size} bytes</Caption>
@@ -68,14 +64,21 @@ const PopupWidget = () => {
     </Stack>
   );
 
+  const errorMessage = hasError && (
+    <Banner
+      title="The following images couldn’t be uploaded:"
+      status="critical"
+    >
+      <List type="bullet">
+            <p>{`"${rejectedFile.file.name}" is not supported. File type must be .gif, .jpg, .png or .svg.`}</p>
+      </List>
+    </Banner>
+  );
+
   return (
     <Stack vertical>
-      <DropZone
-        accept="image/*"
-        allowMultiple={false}
-        type="image"
-        onDrop={handleDrop}
-      >
+      {errorMessage}
+      <DropZone accept="image/*" type="image" allowMultiple={false} onDrop={handleDrop}>
         {uploadedFile}
         {fileUpload}
       </DropZone>
