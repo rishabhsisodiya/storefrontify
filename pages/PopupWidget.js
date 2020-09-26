@@ -122,75 +122,81 @@ const PopupWidget = () => {
         <Modal open={active} onClose={handleModel}>
           <Modal.Section>
             <TextContainer>
-              <div
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  height: "50%",
-                  paddingLeft: "5%",
-                  paddingRight: "5%",
-                }}
-              >
-                <img
-                  src={
-                    validImageTypes.indexOf(file?.type) > 0
-                      ? window.URL.createObjectURL(file)
-                      : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
-                  }
-                  alt={file?.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-              <div
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "25%",
-                  textAlign: "center",
-                  padding: "2%",
-                }}
-              >
-                <h1 style={{ fontWeight: "bold" }}>{popHeading}</h1>
-                <h3 style={{ fontSize: "1rem" }}>{popContent}</h3>
-              </div>
-              <div
-                className="popoverForm"
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "20%",
-                }}
-              >
-                <input
-                  id="cEmail"
-                  type="email"
+              <div style={{ maxWidth: "700px", maxHeight: "500px" }}>
+                <div
                   style={{
-                    width: "50%",
-                    marginRight: "1%",
-                    marginLeft: "1%",
-                    border: "1px solid lightgray",
-                    borderRadius: "10px",
-                  }}
-                  placeholder="Email"
-                />
-                <button
-                  id="sendemailbutton"
-                  style={{
-                    width: "max-content",
-                    maxWidth: "170px",
-                    color: "#212529",
-                    borderRadius: "10px",
-                    marginRight: "1%",
-                    marginLeft: "1%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "50%",
+                    paddingLeft: "5%",
+                    paddingRight: "5%",
                   }}
                 >
-                  <p style={{ color: "black", fontWeight: "bold" }}>
-                    {textButton}
-                  </p>
-                </button>
+                  <img
+                    src={
+                      validImageTypes.indexOf(file?.type) > 0
+                        ? window.URL.createObjectURL(file)
+                        : "https://cdn.shopify.com/s/files/1/0757/9955/files/New_Post.png?12678548500147524304"
+                    }
+                    alt={file?.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "25%",
+                    textAlign: "center",
+                    padding: "2%",
+                  }}
+                >
+                  <h1 style={{ fontWeight: "bold" }}>{popHeading}</h1>
+                  <h3 style={{ fontSize: "1rem" }}>{popContent}</h3>
+                </div>
+                <div
+                  className="popoverForm"
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "20%",
+                  }}
+                >
+                  <input
+                    id="cEmail"
+                    type="email"
+                    style={{
+                      width: "50%",
+                      marginRight: "1%",
+                      marginLeft: "1%",
+                      border: "1px solid lightgray",
+                      borderRadius: "10px",
+                    }}
+                    placeholder="Email"
+                  />
+                  <button
+                    id="sendemailbutton"
+                    style={{
+                      width: "max-content",
+                      maxWidth: "170px",
+                      color: "#212529",
+                      borderRadius: "10px",
+                      marginRight: "1%",
+                      marginLeft: "1%",
+                    }}
+                  >
+                    <p style={{ color: "black", fontWeight: "bold" }}>
+                      {textButton}
+                    </p>
+                  </button>
+                </div>
               </div>
             </TextContainer>
           </Modal.Section>
