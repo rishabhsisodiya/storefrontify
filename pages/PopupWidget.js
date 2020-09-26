@@ -50,7 +50,7 @@ const PopupWidget = () => {
     []
   );
 
-  const imageUrl = () => window.URL.createObjectURL(file);
+  // const imageUrl = () => window.URL.createObjectURL(file);
 
   // const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
   
@@ -60,7 +60,7 @@ const PopupWidget = () => {
       <Thumbnail
         size="small"
         alt={file?.name}
-        source={imageUrl}
+        source={window?.URL.createObjectURL(file)}
       />
       <div>
         {file?.name} <Caption>{file?.size} bytes</Caption>
@@ -131,7 +131,7 @@ const PopupWidget = () => {
                 }}
               >
                 <img
-                  src={imageUrl}
+                  src={window?.URL.createObjectURL(file)}
                   alt={file?.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
