@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EmptyState, Layout, Page, Card } from "@shopify/polaris";
+import { EmptyState, Layout, Page, Card, Button } from "@shopify/polaris";
 import { ResourcePicker, TitleBar } from "@shopify/app-bridge-react";
 import store from "store-js";
 import ProductList from "../components/ProductList";
@@ -61,7 +61,7 @@ const SellerButtonWidget = () => {
       ) : (
         <Card>
           <div style={{ float: "right" }}>
-            <Button onClick={() => setModal({ open: true })}>Select New Product</Button>
+            <Button onClick={() => setModal({ open: true })} primary>Select New Product</Button>
           </div>
           <ProductList />
         </Card>
