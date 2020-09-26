@@ -39,7 +39,6 @@ const PopupWidget = () => {
   );
 
   const handleModel = useCallback(() => setActive(!active), [active]);
-  const hasError = rejectedFiles.length > 0;
 
   const handleDrop = useCallback(
     (_dropFiles, acceptedFiles, _rejectedFiles) => {
@@ -71,7 +70,6 @@ const PopupWidget = () => {
 
   return (
     <Stack vertical>
-      {errorMessage}
       <DropZone
         accept="image/*"
         allowMultiple={false}
