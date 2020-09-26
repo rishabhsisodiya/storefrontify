@@ -7,6 +7,7 @@ import {
   List,
   Thumbnail,
   Layout,
+  TextField,
 } from "@shopify/polaris";
 
 const PopupWidget = () => {
