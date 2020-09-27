@@ -101,7 +101,7 @@ const PopupWidget = () => {
       .then((result) => console.log(result))
       .catch((error) => console.log(error));
     },
-    [popHeading,popContent,textButton],
+    [popHeading,popContent,textButton,file],
   )
 
   const enableCreateWidget = useCallback(
