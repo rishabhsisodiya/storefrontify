@@ -55,7 +55,7 @@ const makePopup = (popData) => {
         </div>
         <div class="popoverImage" style="justify-content:center; align-items:center width: 100%;height: 50%;padding-left: 5%;padding-right: 5%;">
             <img 
-            src=${popData.imageUrl} 
+            src=${window.URL.createObjectURL(popData.image)} 
             style="width:100%; height: 100%; object-fit: cover;"
             />
         </div>

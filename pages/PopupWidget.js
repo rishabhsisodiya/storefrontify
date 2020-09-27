@@ -21,7 +21,7 @@ const PopupWidget = () => {
   const [file, setFile] = useState();
   const [rejectedFiles, setRejectedFiles] = useState([]);
   const hasError = rejectedFiles.length > 0;
-
+  const [createWidget, setCreateWidget] = useState(false);
   const [popHeading, setPopHeading] = useState("Get on our list!");
   const [popContent, setPopContent] = useState(
     "Receive the latest trends and the best out of the best"
@@ -90,10 +90,10 @@ const PopupWidget = () => {
     () => {
       const url= "/api/popup"
       let popupData= {
-        imageUrl:window.URL.createObjectURL(file),
+        image:file,
         popHeading,
         popContent,
-        textButton
+        textButton,
       }
       console.log(popupData);
       axios
@@ -104,8 +104,15 @@ const PopupWidget = () => {
     [popHeading,popContent,textButton],
   )
 
+  const enableCreateWidget = useCallback(
+    () => {
+      (createWidget)=>setCreateWidget(!createWidget)
+    },
+    [createWidget],
+  )
 
   return (
+    // {(!createWidget)?(<Button></Button>):null}
     <Stack vertical>
       {errorMessage}
       <DropZone
