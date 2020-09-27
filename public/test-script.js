@@ -27,7 +27,8 @@ body.css({
 const shop = Shopify.shop;
 
 const makePopup = (popData) => {
-  let imageURL = window.URL.createObjectURL(popData.image)
+  let imageURL = window.URL.createObjectURL(popData.image);
+  console.log('image url:',imageURL);
   const popupOverlay = $(`
   <div></div>
   `).css({
@@ -120,7 +121,7 @@ if (!popupCookieArray.length) {
     .then((data) => {
       // if no data then pop will not display
       if(data.data){
-        // console.log(data.data);
+        console.log(data.data);
         makePopup(data.data);
       }
     })
