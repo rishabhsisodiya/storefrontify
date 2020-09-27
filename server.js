@@ -43,9 +43,11 @@ router.get("/api/popup", async (ctx) => {
 router.post("/api/popup", koaBody(), async (ctx) => {
   try {
     const body = ctx.request.body;
+    console.log('body:',body);
     popupData = body;
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.body = "Item Added";
+    console.log('data :',popupData);
   } catch (error) {
     console.log(error);
   }
