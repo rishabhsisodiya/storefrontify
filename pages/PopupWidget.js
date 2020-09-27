@@ -90,7 +90,7 @@ const PopupWidget = () => {
     () => {
       const url= "/api/popup"
       let popupData= {
-        image:file,
+        image:window.URL.createObjectURL(file),
         popHeading,
         popContent,
         textButton,
