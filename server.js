@@ -26,18 +26,31 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-// router.get("/popup", async(ctx) =>{
-//   try {
-//     // CORS ISSUE FIX
-//     ctx.set('Access-Control-Allow-Origin', '*');
-//     ctx.body = {
-//       status: "success",
-//       popup: "close",
-//     };
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })
+var popupData= '';
+router.get("/api/popup", async (ctx) => {
+  try {
+    // CORS ISSUE FIX
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.body = {
+      status: "success",
+      data: popupData,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post("/api/popup", koaBody(), async (ctx) => {
+  try {
+    const body = ctx.request.body;
+    popupData = body;
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.body = "Item Added";
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/api/send", koaBody(), async (ctx) => {
   try {
     const email = ctx.request.body;
@@ -58,9 +71,6 @@ router.get("/api/products", async (ctx) => {
   try {
     // CORS ISSUE FIX
     ctx.set('Access-Control-Allow-Origin', '*');
-    // when not logged in shopify admin app script is blocked by browser without proper auth
-    // so content type is nosniff
-    // ctx.set('X-Content-Type-Options','nosniff');
     ctx.body = {
       status: "success",
       data: products,
@@ -119,10 +129,6 @@ app.prepare().then(() => {
           secure: true,
           sameSite: "none",
         });
-        // ctx.set('X-Content-Type-Options','nosniff')
-        // ctx.set('Access-Control-Allow-Origin', '*');
-        // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        // ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
         ctx.redirect("/");
 
         // uncomment below code to add subscription billing page for your app

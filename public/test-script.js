@@ -26,7 +26,7 @@ body.css({
 
 const shop = Shopify.shop;
 
-const makePopup = () => {
+const makePopup = (popData) => {
   const popupOverlay = $(`
   <div></div>
   `).css({
@@ -60,13 +60,13 @@ const makePopup = () => {
             />
         </div>
         <div class="popoverContent" style="justify-content:center; align-items:center height: 25%;padding: 2%; text-align:center">
-            <h1 style="font-weight: bold;">Get on our list!</h1>
-            <h3 style="font-size: 1rem;">Receive the latest trends and the best out of the best.-by Rishabh</h3>
+            <h1 style="font-weight: bold;">${popData.popHeading}</h1>
+            <h3 style="font-size: 1rem;">${popData.popContent}</h3>
         </div>
         <div class="popoverForm" style="display:flex;flex-wrap: wrap;justify-content:center; align-items:center;height: 20%;">
             <input id="cEmail" type="email" style="width:50%; margin-right: 1%;margin-left: 1%;border: 1px solid lightgray;border-radius: 10px" placeholder="Email" />
             <button id="sendemailbutton" style="width:max-content; max-width: 170px; color:#212529;border-radius:10px;margin-left: 1%;margin-right: 1%">
-            <p style="color: white;font-weight: bold;">Get Superb Dresses</p>
+            <p style="color: white;font-weight: bold;">${popData.textButton}</p>
             </button>
         </div>
     </div>
@@ -112,7 +112,14 @@ let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
 // First time visited website , doesn't have closepopup value
 // console.log('popup closed: ',popupCookieArray);
 if (!popupCookieArray.length) {
-  makePopup()
+  fetch(
+    "https://storefrontify.herokuapp.com/api/popup?shop=ambraee-dev1.myshopify.com"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      makePopup(data.data);
+    })
+    .catch((error) => console.log(error));
 }
 
 

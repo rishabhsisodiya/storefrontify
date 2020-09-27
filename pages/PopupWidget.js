@@ -14,6 +14,7 @@ import {
   Modal,
   TextContainer,
 } from "@shopify/polaris";
+import axios from "axios";
 
 const PopupWidget = () => {
   const [active, setActive] = useState(false);
@@ -85,6 +86,24 @@ const PopupWidget = () => {
     </Banner>
   );
 
+  const postData = useCallback(
+    () => {
+      const url= "/api/popup"
+      let popupData= {
+        popHeading,
+        popContent,
+        textButton
+      }
+      console.log(popupData);
+      axios
+      .post(url, popupData)
+      .then((result) => console.log(result))
+      .catch((error) => console.log(error));
+    },
+    [popHeading,popContent,textButton],
+  )
+
+
   return (
     <Stack vertical>
       {errorMessage}
@@ -114,7 +133,7 @@ const PopupWidget = () => {
       />
       <ButtonGroup>
         <Button onClick={handleModel}>Preview</Button>
-        <Button primary onClick={() => alert("widget Added")}>
+        <Button primary onClick={postData}>
           Add to Store
         </Button>
       </ButtonGroup>
