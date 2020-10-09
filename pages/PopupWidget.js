@@ -16,7 +16,7 @@ import {
 } from "@shopify/polaris";
 import axios from "axios";
 
-const PopupWidget = () => {
+const PopupWidget = (props) => {
   const [active, setActive] = useState(false);
   const [file, setFile] = useState();
   const [rejectedFiles, setRejectedFiles] = useState([]);
@@ -90,7 +90,8 @@ const PopupWidget = () => {
     () => {
       const url= "/api/popup"
       let popupData= {
-        image:window.URL.createObjectURL(file),
+        shop:props.shop,
+        image:file,
         popHeading,
         popContent,
         textButton,

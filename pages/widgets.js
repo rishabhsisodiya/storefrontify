@@ -2,9 +2,21 @@ import React, { useState , useCallback} from "react";
 import PopupWidget from "./PopupWidget";
 import { Card, Tabs } from "@shopify/polaris";
 import SellerButtonWidget from "./SellerButtonWidget";
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+
+const GET_SHOP = gql`
+query getShop{
+  shop{
+    url
+  }
+}
+`;
 
 const widgets = () => {
-    const [selected, setSelected] = useState(0);
+  const { loading, error, data } = useQuery(GET_SHOP);
+  console.log('Shop Data:',data);
+  const [selected, setSelected] = useState(0);
 
   const handleTabChange = useCallback(
     (selectedTabIndex) => setSelected(selectedTabIndex),
@@ -26,10 +38,10 @@ const widgets = () => {
   ];
   let selectedWidget;
   if (selected == 0) {
-      selectedWidget = (<PopupWidget />);
+      selectedWidget = (<PopupWidget shop={data.shop.url}/>);
   }
   if(selected ==1){
-      selectedWidget= (<SellerButtonWidget />);
+      selectedWidget= (<SellerButtonWidget shop={data.shop.url}/>);
   }
   return (
       <Card>

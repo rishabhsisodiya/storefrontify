@@ -9,11 +9,21 @@ const session = require("koa-session");
 const koaBody = require("koa-body");
 const koaStatic = require("koa-static");
 const mount = require("koa-mount");
-
+const mongoose = require("mongoose");
+const config = require("./config/key");
 dotenv.config();
 const { default: graphQLProxy } = require("@shopify/koa-shopify-graphql-proxy");
 const { ApiVersion } = require("@shopify/koa-shopify-graphql-proxy");
 const getSubscriptionUrl = require("./server/getSubscriptionUrl");
+
+const connect = mongoose
+  .connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
+// models
+const { Shop } = require("./models/Shop");
+const { Product } = require("./models/Product");
+const { PopUp } = require("./models/PopUp");
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
@@ -26,11 +36,11 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-var popupData= '';
+var popupData = "";
 router.get("/api/popup", async (ctx) => {
   try {
     // CORS ISSUE FIX
-    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set("Access-Control-Allow-Origin", "*");
     ctx.body = {
       status: "success",
       data: popupData,
@@ -43,11 +53,9 @@ router.get("/api/popup", async (ctx) => {
 router.post("/api/popup", koaBody(), async (ctx) => {
   try {
     const body = ctx.request.body;
-    console.log('body:',body);
     popupData = body;
-    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set("Access-Control-Allow-Origin", "*");
     ctx.body = "Item Added";
-    console.log('data :',popupData);
   } catch (error) {
     console.log(error);
   }
@@ -57,14 +65,14 @@ router.post("/api/send", koaBody(), async (ctx) => {
   try {
     const email = ctx.request.body;
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(re.test(email)){
+    if (re.test(email)) {
       ctx.body = "Thank You for Subscription!!!";
       // save to database
       console.log(email);
-    }else{
+    } else {
       ctx.body = "Entered wrong email. Please try again!!";
     }
-    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set("Access-Control-Allow-Origin", "*");
   } catch (error) {
     console.log(error);
   }
@@ -72,10 +80,11 @@ router.post("/api/send", koaBody(), async (ctx) => {
 router.get("/api/products", async (ctx) => {
   try {
     // CORS ISSUE FIX
-    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set("Access-Control-Allow-Origin", "*");
+    console.log("paramas:", ctx.params);
+    // Product.find
     ctx.body = {
       status: "success",
-      data: products,
     };
   } catch (error) {
     console.log(error);
@@ -85,9 +94,22 @@ router.get("/api/products", async (ctx) => {
 router.post("/api/products", koaBody(), async (ctx) => {
   try {
     const body = ctx.request.body;
-    await products.push(body);
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.body = "Item Added";
+    const product = new Product(body);
+    console.log("paramas:", ctx.params);
+    product.save((err) => {
+      if (err) {
+        ctx.response.status = 404;
+        ctx.body = {
+          status: "Products not Saved",
+          err,
+        };
+      } else {
+        ctx.response.status = 201;
+        ctx.body = "products created";
+      }
+    });
+    ctx.set("Access-Control-Allow-Origin", "*");
+    // ctx.body = "Item Added";
   } catch (error) {
     console.log(error);
   }
@@ -96,10 +118,77 @@ router.post("/api/products", koaBody(), async (ctx) => {
 router.delete("/api/products", koaBody(), async (ctx) => {
   try {
     products = [];
-    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set("Access-Control-Allow-Origin", "*");
     ctx.body = "All items deleted!";
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.post("/api/shop", koaBody(), async (ctx) => {
+  try {
+    // console.log("paramas:", ctx.url.split('='));
+
+    // const shopName = ctx.url.split('=')[1];
+    // console.log('shop='+shopName);
+    ctx.set("Access-Control-Allow-Origin", "*");
+    const { shop, popup, products } = ctx.request.body;
+    // console.log("name: ",name+',popup: '+popup+',products:'+products);
+    // const shop = new Shop(body);
+
+    // Find and update else create
+    Shop.findOne({ name: shop }, function (err, doc) {
+      let statusCode;
+      let msg;
+      if (err) {
+        statusCode = 400;
+        msg = err;
+      }
+      // If shop Exist
+      if (doc) {
+        // Check popup data is present in request or not
+        if (popup) {
+          doc.popup = popup;
+        }
+        // Check products data is present in request or not
+        if (products) {
+          doc.products = products;
+        }
+
+        doc.save();
+        statusCode = 201;
+        msg = "Shop Data Updated";
+      }
+      // Shop not exist , Create a new one
+      else {
+        // console.log("creating new shop",doc);
+        const newShop = new Shop({ name: shop, popup, products });
+        // console.log("NEw shop:", newShop);
+        newShop.save((err) => {
+          if (err) {
+            statusCode = 400;
+            msg = err;
+          } else {
+            statusCode = 201;
+            msg = "Shop Data Added";
+          }
+        });
+      }
+      ctx.respond
+      ctx.res.statusCode=201;
+      ctx.res.statusMessage="Shop Data Added";
+      console.log('inside function',ctx);
+    });
+    // //
+    // console.log("Status Code:", statusCode);
+    // console.log("Status Msg:", msg);
+    // ctx.res.statusCode = parseInt(statusCode);
+    // ctx.res.statusMessage = msg;
+    console.log('outside function',ctx);
+  } catch (error) {
+    console.log("catch error:", error);
+    ctx.res.statusCode = 400;
+    ctx.res.statusMessage = err;
   }
 });
 

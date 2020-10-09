@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "nodemon":"nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -33,7 +34,9 @@
     "koa-router": "^9.4.0",
     "koa-session": "^6.0.0",
     "koa-static": "^5.0.0",
+    "mongoose": "^5.10.7",
     "next": "^9.5.0",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",

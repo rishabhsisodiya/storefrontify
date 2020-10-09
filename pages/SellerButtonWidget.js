@@ -5,7 +5,7 @@ import store from "store-js";
 import ProductList from "../components/ProductList";
 import axios from "axios";
 
-const SellerButtonWidget = () => {
+const SellerButtonWidget = (props) => {
   const [modal, setModal] = useState({ open: false });
   const emptyState = !store.get("ids");
 
@@ -31,7 +31,7 @@ const SellerButtonWidget = () => {
     const url = "/api/products";
 
     axios
-      .post(url, products)
+      .post(url, { shop: props.shop, products })
       .then((result) => console.log(result))
       .catch((error) => console.log(error));
   }
