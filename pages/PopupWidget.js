@@ -88,9 +88,8 @@ const PopupWidget = (props) => {
 
   const postData = useCallback(
     () => {
-      const url= "/api/popup"
+      const url= "/api/shop"
       let popupData= {
-        shop:props.shop,
         image:file,
         popHeading,
         popContent,
@@ -98,7 +97,7 @@ const PopupWidget = (props) => {
       }
       console.log(popupData);
       axios
-      .post(url, popupData)
+      .post(url, {shop:props.shopUrl,popupData})
       .then((result) => console.log(result))
       .catch((error) => console.log(error));
     },

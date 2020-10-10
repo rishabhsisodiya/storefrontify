@@ -36,90 +36,48 @@ const server = new Koa();
 const router = new KoaRouter();
 
 var products = [];
-var popupData = "";
-router.get("/api/popup", async (ctx) => {
+router.get("/api/shop", async (ctx) => {
+  let popupData = null;
+  let productsData = [];
+  console.log("paramas:", ctx.url.split("="));
+
+  const shopName = ctx.url.split("=")[1];
+  console.log("shop=" + shopName);
   try {
     // CORS ISSUE FIX
     ctx.set("Access-Control-Allow-Origin", "*");
-    ctx.body = {
-      status: "success",
-      data: popupData,
-    };
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.post("/api/popup", koaBody(), async (ctx) => {
-  try {
-    const body = ctx.request.body;
-    popupData = body;
-    ctx.set("Access-Control-Allow-Origin", "*");
-    ctx.body = "Item Added";
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.post("/api/send", koaBody(), async (ctx) => {
-  try {
-    const email = ctx.request.body;
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(email)) {
-      ctx.body = "Thank You for Subscription!!!";
-      // save to database
-      console.log(email);
-    } else {
-      ctx.body = "Entered wrong email. Please try again!!";
-    }
-    ctx.set("Access-Control-Allow-Origin", "*");
-  } catch (error) {
-    console.log(error);
-  }
-});
-router.get("/api/products", async (ctx) => {
-  try {
-    // CORS ISSUE FIX
-    ctx.set("Access-Control-Allow-Origin", "*");
-    console.log("paramas:", ctx.params);
-    // Product.find
-    ctx.body = {
-      status: "success",
-    };
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.post("/api/products", koaBody(), async (ctx) => {
-  try {
-    const body = ctx.request.body;
-    const product = new Product(body);
-    console.log("paramas:", ctx.params);
-    product.save((err) => {
+    // get data products and pop
+    Shop.findOne({ name: shopName }, function (err, doc) {
+      let statusCode;
+      let msg;
       if (err) {
-        ctx.response.status = 404;
-        ctx.body = {
-          status: "Products not Saved",
-          err,
-        };
-      } else {
-        ctx.response.status = 201;
-        ctx.body = "products created";
+        statusCode = 400;
+        msg = err;
       }
-    });
-    ctx.set("Access-Control-Allow-Origin", "*");
-    // ctx.body = "Item Added";
-  } catch (error) {
-    console.log(error);
-  }
-});
+      // If shop Exist
+      if (doc) {
+        // Check popup data is present in request or not
+        if (doc.popup) {
+          popupData = doc.popup;
+        }
+        // Check products data is present in request or not
+        if (doc.products) {
+          productsData = doc.products;
+        }
 
-router.delete("/api/products", koaBody(), async (ctx) => {
-  try {
-    products = [];
-    ctx.set("Access-Control-Allow-Origin", "*");
-    ctx.body = "All items deleted!";
+        // doc.save();
+        statusCode = 201;
+        msg = "Shop Data Updated";
+      }
+      ctx.res.statusCode = 201;
+      ctx.res.statusMessage = "Shop Data Added";
+      console.log("inside function", ctx);
+    });
+    ctx.body = {
+      status: "success",
+      popupData,
+      productsData
+    };
   } catch (error) {
     console.log(error);
   }
@@ -174,23 +132,111 @@ router.post("/api/shop", koaBody(), async (ctx) => {
           }
         });
       }
-      ctx.respond
-      ctx.res.statusCode=201;
-      ctx.res.statusMessage="Shop Data Added";
-      console.log('inside function',ctx);
+      ctx.res.statusCode = 201;
+      ctx.res.statusMessage = "Shop Data Added";
+      console.log("inside function", ctx);
     });
     // //
     // console.log("Status Code:", statusCode);
     // console.log("Status Msg:", msg);
     // ctx.res.statusCode = parseInt(statusCode);
     // ctx.res.statusMessage = msg;
-    console.log('outside function',ctx);
+    console.log("outside function", ctx);
   } catch (error) {
     console.log("catch error:", error);
     ctx.res.statusCode = 400;
     ctx.res.statusMessage = err;
   }
 });
+
+router.post("/api/send", koaBody(), async (ctx) => {
+  try {
+    const email = ctx.request.body;
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email)) {
+      ctx.body = "Thank You for Subscription!!!";
+      // save to database
+      console.log(email);
+    } else {
+      ctx.body = "Entered wrong email. Please try again!!";
+    }
+    ctx.set("Access-Control-Allow-Origin", "*");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// router.get("/api/popup", async (ctx) => {
+//   try {
+//     // CORS ISSUE FIX
+//     ctx.set("Access-Control-Allow-Origin", "*");
+//     ctx.body = {
+//       status: "success",
+//       data: popupData,
+//     };
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+// router.post("/api/popup", koaBody(), async (ctx) => {
+//   try {
+//     const body = ctx.request.body;
+//     popupData = body;
+//     ctx.set("Access-Control-Allow-Origin", "*");
+//     ctx.body = "Item Added";
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+router.get("/api/products", async (ctx) => {
+  try {
+    // CORS ISSUE FIX
+    ctx.set("Access-Control-Allow-Origin", "*");
+    console.log("paramas:", ctx.params);
+    // Product.find
+    ctx.body = {
+      status: "success",
+    };
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post("/api/products", koaBody(), async (ctx) => {
+  try {
+    const body = ctx.request.body;
+    const product = new Product(body);
+    console.log("paramas:", ctx.params);
+    product.save((err) => {
+      if (err) {
+        ctx.response.status = 404;
+        ctx.body = {
+          status: "Products not Saved",
+          err,
+        };
+      } else {
+        ctx.response.status = 201;
+        ctx.body = "products created";
+      }
+    });
+    ctx.set("Access-Control-Allow-Origin", "*");
+    // ctx.body = "Item Added";
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// router.delete("/api/products", koaBody(), async (ctx) => {
+//   try {
+//     products = [];
+//     ctx.set("Access-Control-Allow-Origin", "*");
+//     ctx.body = "All items deleted!";
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 // Router Middleware
 server.use(router.allowedMethods());

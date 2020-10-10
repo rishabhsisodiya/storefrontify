@@ -113,14 +113,14 @@ let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
 // console.log('popup closed: ',popupCookieArray);
 if (!popupCookieArray.length) {
   fetch(
-    "https://storefrontify.herokuapp.com/api/popup?shop=ambraee-dev1.myshopify.com"
+    "https://storefrontify.herokuapp.com/api/shop?shop=ambraee-dev1.myshopify.com"
   )
     .then((res) => res.json())
     .then((data) => {
       // if no data then pop will not display
-      if(data.data){
-        console.log(data.data);
-        makePopup(data.data);
+      if(data.popupData){
+        console.log(data.popupData);
+        makePopup(data.popupData);
       }
     })
     .catch((error) => console.log(error));
@@ -183,11 +183,11 @@ const makeApp = (products) => {
 // https://storefrontify.herokuapp.com/auth?shop=ambraee-dev1.myshopify.com
 // for cors issue add https://cors-anywhere.herokuapp.com/ below with https://storefrontify.herokuapp.com
 fetch(
-  "https://storefrontify.herokuapp.com/api/products?shop=ambraee-dev1.myshopify.com"
+  "https://storefrontify.herokuapp.com/api/shop?shop=ambraee-dev1.myshopify.com"
 )
   .then((res) => res.json())
   .then((data) => {
-    makeApp(data.data);
+    makeApp(data.productsData);
     // makePopUp();
   })
   .catch((error) => console.log(error));

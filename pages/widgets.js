@@ -38,10 +38,10 @@ const widgets = () => {
   ];
   let selectedWidget;
   if (selected == 0) {
-      selectedWidget = (<PopupWidget shop={data.shop.url}/>);
+      selectedWidget = (<PopupWidget shopUrl={data.shop.url}/>);
   }
   if(selected ==1){
-      selectedWidget= (<SellerButtonWidget shop={data.shop.url}/>);
+      selectedWidget= (<SellerButtonWidget shopUrl={data.shop.url}/>);
   }
   return (
       <Card>

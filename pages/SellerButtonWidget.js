@@ -16,22 +16,22 @@ const SellerButtonWidget = (props) => {
 
     const selectedProducts = resources.selection;
 
-    deleteApiData();
+    // deleteApiData();
 
     selectedProducts.map((product) => makeApiCall(product));
   }
 
-  function deleteApiData() {
-    const url = "/api/products";
+  // function deleteApiData() {
+  //   const url = "/api/products";
 
-    axios.delete(url);
-  }
+  //   axios.delete(url);
+  // }
 
   async function makeApiCall(products) {
-    const url = "/api/products";
+    const url = "/api/shop";
 
     axios
-      .post(url, { shop: props.shop, products })
+      .post(url, { shop: props.shopUrl, products })
       .then((result) => console.log(result))
       .catch((error) => console.log(error));
   }
