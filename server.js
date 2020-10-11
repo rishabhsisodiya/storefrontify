@@ -96,11 +96,11 @@ router.post("/api/shop", koaBody(), async (ctx) => {
 
     // Find and update else create
     Shop.findOne({ name: shop }, function (err, doc) {
+      console.log('inside findONe');
       let statusCode;
       let msg;
       if (err) {
-        statusCode = 400;
-        msg = err;
+        console.log(err);
         throw err;
       }
       // If shop Exist
@@ -121,7 +121,7 @@ router.post("/api/shop", koaBody(), async (ctx) => {
       }
       // Shop not exist , Create a new one
       else {
-        console.log("creating new shop",doc);
+        // console.log("creating new shop",doc);
         const newShop = new Shop({ name: shop, popup, products });
         console.log("NEw shop:", newShop);
         newShop.save((err) => {
@@ -140,12 +140,9 @@ router.post("/api/shop", koaBody(), async (ctx) => {
       // ctx.res.statusMessage = "Shop Data Added";
       // console.log("inside function", ctx);
     });
-    // //
-    // console.log("Status Code:", statusCode);
-    // console.log("Status Msg:", msg);
     ctx.res.statusCode = 201;
     ctx.res.statusMessage = "Shop Data Added";
-    console.log("outside function", ctx);
+    // console.log("outside function", ctx);
   } catch (error) {
     console.log("catch error:", error);
     ctx.res.statusCode = 400;

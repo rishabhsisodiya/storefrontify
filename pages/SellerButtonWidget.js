@@ -18,7 +18,8 @@ const SellerButtonWidget = (props) => {
 
     // deleteApiData();
 
-    selectedProducts.map((product) => makeApiCall(product));
+    // selectedProducts.map((product) => makeApiCall(product));
+    makeApiCall(selectedProducts);
   }
 
   // function deleteApiData() {
