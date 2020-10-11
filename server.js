@@ -121,7 +121,7 @@ router.post("/api/shop", koaBody(), async (ctx) => {
       }
       // Shop not exist , Create a new one
       else {
-        // console.log("creating new shop",doc);
+        console.log("creating new shop",doc);
         const newShop = new Shop({ name: shop, popup, products });
         console.log("NEw shop:", newShop);
         newShop.save((err) => {
