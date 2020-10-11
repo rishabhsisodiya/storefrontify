@@ -113,7 +113,7 @@ let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
 // console.log('popup closed: ',popupCookieArray);
 if (!popupCookieArray.length) {
   fetch(
-    "https://storefrontify.herokuapp.com/api/shop?shop=ambraee-dev1.myshopify.com"
+    `https://storefrontify.herokuapp.com/api/shop?shop=https://${shop}`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -183,7 +183,7 @@ const makeApp = (products) => {
 // https://storefrontify.herokuapp.com/auth?shop=ambraee-dev1.myshopify.com
 // for cors issue add https://cors-anywhere.herokuapp.com/ below with https://storefrontify.herokuapp.com
 fetch(
-  `https://storefrontify.herokuapp.com/api/shop?shop=${shop}`
+  `https://storefrontify.herokuapp.com/api/shop?shop=https://${shop}`
 )
   .then((res) => res.json())
   .then((data) => {

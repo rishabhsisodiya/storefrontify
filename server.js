@@ -39,8 +39,6 @@ var products = [];
 router.get("/api/shop", async (ctx) => {
   let popupData = null;
   let productsData = [];
-  console.log("paramas:", ctx.url.split("="));
-
   const shopName = ctx.url.split("shop=")[1];
   console.log("shop=" + shopName);
   try {
@@ -66,7 +64,6 @@ router.get("/api/shop", async (ctx) => {
       }
       ctx.res.statusCode = 201;
       ctx.res.statusMessage = "Shop Data Retreived";
-      console.log("inside function", ctx);
     });
     ctx.body = {
       status: "success",
@@ -80,21 +77,11 @@ router.get("/api/shop", async (ctx) => {
 
 router.post("/api/shop", koaBody(), async (ctx) => {
   try {
-    // console.log("paramas:", ctx.url.split('='));
-
-    // const shopName = ctx.url.split('=')[1];
-    // console.log('shop='+shopName);
     ctx.set("Access-Control-Allow-Origin", "*");
     const { shop, popup, products } = ctx.request.body;
-    console.log("shop: ", shop + ",popup: " + popup + ",products:" + products);
-    // const shop = new Shop(body);
-    
     // Find and update else create
     Shop.findOne({ name: shop }, function (err, doc) {
-      let statusCode;
-      let msg;
       if (err) {
-        console.log(err);
         throw err;
       }
       // If shop Exist
@@ -109,30 +96,17 @@ router.post("/api/shop", koaBody(), async (ctx) => {
         }
 
         doc.save();
-        statusCode = 201;
-        msg = "Shop Data Updated";
-        console.log(msg);
       }
       // Shop not exist , Create a new one
       else {
         // console.log("creating new shop",doc);
         const newShop = new Shop({ name: shop, popup, products });
-        console.log("NEw shop:", newShop);
         newShop.save((err) => {
           if (err) {
-            statusCode = 400;
-            msg = err;
             throw err;
-          } else {
-            statusCode = 201;
-            msg = "Shop Data Added";
-          }
+          } 
         });
       }
-      console.log(msg);
-      // ctx.res.statusCode = 201;
-      // ctx.res.statusMessage = "Shop Data Added";
-      // console.log("inside function", ctx);
     });
     ctx.res.statusCode = 201;
     ctx.res.statusMessage = "Shop Data Added";
