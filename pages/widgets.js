@@ -4,6 +4,7 @@ import { Card, Spinner, Tabs } from "@shopify/polaris";
 import SellerButtonWidget from "./SellerButtonWidget";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
+import Cookies from "js-cookie";
 
 const GET_SHOP = gql`
   query getShop {
@@ -16,6 +17,7 @@ const GET_SHOP = gql`
 const widgets = () => {
   const { loading, error, data } = useQuery(GET_SHOP);
   console.log("Shop Data:", data);
+  console.log("Shop Origin"+Cookies.get('shopOrigin'));
   const [selected, setSelected] = useState(0);
 
   const handleTabChange = useCallback(

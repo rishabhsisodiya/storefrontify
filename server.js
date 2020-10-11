@@ -101,6 +101,7 @@ router.post("/api/shop", koaBody(), async (ctx) => {
       if (err) {
         statusCode = 400;
         msg = err;
+        throw err;
       }
       // If shop Exist
       if (doc) {
@@ -122,11 +123,12 @@ router.post("/api/shop", koaBody(), async (ctx) => {
       else {
         // console.log("creating new shop",doc);
         const newShop = new Shop({ name: shop, popup, products });
-        // console.log("NEw shop:", newShop);
+        console.log("NEw shop:", newShop);
         newShop.save((err) => {
           if (err) {
             statusCode = 400;
             msg = err;
+            throw err;
           } else {
             statusCode = 201;
             msg = "Shop Data Added";
@@ -134,20 +136,20 @@ router.post("/api/shop", koaBody(), async (ctx) => {
         });
       }
       console.log(msg);
-      ctx.res.statusCode = 201;
-      ctx.res.statusMessage = "Shop Data Added";
-      console.log("inside function", ctx);
+      // ctx.res.statusCode = 201;
+      // ctx.res.statusMessage = "Shop Data Added";
+      // console.log("inside function", ctx);
     });
     // //
     // console.log("Status Code:", statusCode);
     // console.log("Status Msg:", msg);
-    // ctx.res.statusCode = parseInt(statusCode);
-    // ctx.res.statusMessage = msg;
+    ctx.res.statusCode = 201;
+    ctx.res.statusMessage = "Shop Data Added";
     console.log("outside function", ctx);
   } catch (error) {
     console.log("catch error:", error);
     ctx.res.statusCode = 400;
-    ctx.res.statusMessage = err;
+    ctx.res.statusMessage = error;
   }
 });
 
