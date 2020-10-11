@@ -111,20 +111,20 @@ let popupCookieArray =cookieArray.filter(str=> str.includes("closepopup"))
 // let closepopvalue=popupCookieArray[0].split("=")[1];
 // First time visited website , doesn't have closepopup value
 // console.log('popup closed: ',popupCookieArray);
-if (!popupCookieArray.length) {
-  fetch(
-    `https://storefrontify.herokuapp.com/api/shop?shop=https://${shop}`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      // if no data then pop will not display
-      if(data.popupData){
-        console.log(data.popupData);
-        makePopup(data.popupData);
-      }
-    })
-    .catch((error) => console.log(error));
-}
+// if (!popupCookieArray.length) {
+//   fetch(
+//     `https://storefrontify.herokuapp.com/api/shop?shop=https://${shop}`
+//   )
+//     .then((res) => res.json())
+//     .then((data) => {
+//       // if no data then pop will not display
+//       if(data.popupData){
+//         console.log(data.popupData);
+//         makePopup(data.popupData);
+//       }
+//     })
+//     .catch((error) => console.log(error));
+// }
 
 
 //  Best Seller APP
@@ -187,7 +187,14 @@ fetch(
 )
   .then((res) => res.json())
   .then((data) => {
-    makeApp(data.productsData);
+    if (data.productsData) {
+      makeApp(data.productsData);
+    }
+    // Popup Widgets
+    if (data.popupData && !popupCookieArray.length) {
+      console.log(data.popupData);
+        makePopup(data.popupData);
+    }
   })
   .catch((error) => console.log(error));
 

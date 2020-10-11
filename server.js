@@ -39,13 +39,13 @@ var products = [];
 router.get("/api/shop", async (ctx) => {
   let popupData = null;
   let productsData = [];
-  const shopName = ctx.url.split("shop=")[1];
-  console.log("shop=" + shopName);
+  const shopName = "https://" + ctx.url.split("shop=")[1];
+  // console.log("shop=" + shopName);
   try {
     // CORS ISSUE FIX
     ctx.set("Access-Control-Allow-Origin", "*");
-    // get data products and pop
-    Shop.findOne({ name: shopName }, function (err, doc) {
+    // get data products and pop. Await so that we can set popupdata and productsData values other wise it will show undefined
+    await Shop.findOne({ name: shopName }, function (err, doc) {
       if (err) {
         throw err;
       }
@@ -59,19 +59,22 @@ router.get("/api/shop", async (ctx) => {
         if (doc.products) {
           productsData = doc.products;
         }
-
-        // doc.save();
       }
-      ctx.res.statusCode = 201;
-      ctx.res.statusMessage = "Shop Data Retreived";
     });
+
+    // console.log('products outside :', productsData);
     ctx.body = {
       status: "success",
       popupData,
       productsData,
     };
+    // ctx.res.statusCode=responseCode;
+    // ctx.res.statusMessage=responseMessage;
+    // console.log("Response Body: ", ctx.body);
   } catch (error) {
     console.log(error);
+    ctx.res.statusCode=400;
+    ctx.res.statusMessage="Bad Request";
   }
 });
 
@@ -104,7 +107,7 @@ router.post("/api/shop", koaBody(), async (ctx) => {
         newShop.save((err) => {
           if (err) {
             throw err;
-          } 
+          }
         });
       }
     });
