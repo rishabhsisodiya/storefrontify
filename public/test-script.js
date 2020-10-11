@@ -183,12 +183,11 @@ const makeApp = (products) => {
 // https://storefrontify.herokuapp.com/auth?shop=ambraee-dev1.myshopify.com
 // for cors issue add https://cors-anywhere.herokuapp.com/ below with https://storefrontify.herokuapp.com
 fetch(
-  "https://storefrontify.herokuapp.com/api/shop?shop=ambraee-dev1.myshopify.com"
+  `https://storefrontify.herokuapp.com/api/shop?shop=${shop}`
 )
   .then((res) => res.json())
   .then((data) => {
     makeApp(data.productsData);
-    // makePopUp();
   })
   .catch((error) => console.log(error));
 
