@@ -97,7 +97,7 @@ const PopupWidget = (props) => {
       }
       console.log(popupData);
       axios
-      .post(url, {shop:props.shopUrl,popupData})
+      .post(url, {shop:props.shop,popupData})
       .then((result) => console.log(result))
       .catch((error) => console.log(error));
     },

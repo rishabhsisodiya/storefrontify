@@ -31,7 +31,7 @@ const SellerButtonWidget = (props) => {
     const url = "/api/shop";
 
     axios
-      .post(url, { shop: props.shopUrl, products })
+      .post(url, { shop: props.shop, products })
       .then((result) => console.log(result))
       .catch((error) => console.log(error));
   }
