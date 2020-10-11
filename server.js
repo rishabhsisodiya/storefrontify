@@ -91,7 +91,7 @@ router.post("/api/shop", koaBody(), async (ctx) => {
     // console.log('shop='+shopName);
     ctx.set("Access-Control-Allow-Origin", "*");
     const { shop, popup, products } = ctx.request.body;
-    // console.log("name: ",name+',popup: '+popup+',products:'+products);
+    console.log("shop: ",shop+',popup: '+popup+',products:'+products);
     // const shop = new Shop(body);
 
     // Find and update else create
@@ -116,6 +116,7 @@ router.post("/api/shop", koaBody(), async (ctx) => {
         doc.save();
         statusCode = 201;
         msg = "Shop Data Updated";
+        console.log(msg);
       }
       // Shop not exist , Create a new one
       else {
@@ -132,6 +133,7 @@ router.post("/api/shop", koaBody(), async (ctx) => {
           }
         });
       }
+      console.log(msg);
       ctx.res.statusCode = 201;
       ctx.res.statusMessage = "Shop Data Added";
       console.log("inside function", ctx);
