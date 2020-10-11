@@ -76,7 +76,7 @@ router.get("/api/shop", async (ctx) => {
     ctx.body = {
       status: "success",
       popupData,
-      productsData
+      productsData,
     };
   } catch (error) {
     console.log(error);
@@ -91,12 +91,24 @@ router.post("/api/shop", koaBody(), async (ctx) => {
     // console.log('shop='+shopName);
     ctx.set("Access-Control-Allow-Origin", "*");
     const { shop, popup, products } = ctx.request.body;
-    console.log("shop: ",shop+',popup: '+popup+',products:'+products);
+    console.log("shop: ", shop + ",popup: " + popup + ",products:" + products);
     // const shop = new Shop(body);
-
+    const newShop = new Shop({ name: shop, popup, products });
+    console.log("NEw shop:", newShop);
+    newShop.save((err) => {
+      if (err) {
+        statusCode = 400;
+        msg = err;
+        throw err;
+      } else {
+        statusCode = 201;
+        msg = "Shop Data Added";
+        console.log(msg);
+      }
+    });
     // Find and update else create
     Shop.findOne({ name: shop }, function (err, doc) {
-      console.log('inside findONe');
+      console.log("inside findONe");
       let statusCode;
       let msg;
       if (err) {
